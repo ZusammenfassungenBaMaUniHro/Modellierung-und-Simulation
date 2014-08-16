@@ -8,6 +8,7 @@
 \usepackage{listings} %Programmcode
 \usepackage{tikz} %Grafiken malen
 \usepackage{hyperref}
+\usepackage{dsfont}
 \hypersetup{
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
@@ -47,12 +48,20 @@
 }
 
 
+
 \title{Zusammenfassung: Modellierung und Simulation}
 \author{Andreas Ruscheinski}
 \date{}
 \begin{document}
 \maketitle
 \tableofcontents
+% Verhindert Hurenkinder
+\widowpenalty = 10000
+% Verhindert Schusterjungen
+\clubpenalty = 10000
+
+\section{Hinweis}
+Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der Vorlesung "Modellierung und Simulation" aus dem Sommer Semester 2014. Die Texte sind an die Vorlesung angelehnt. Die Autoren übernehmen keine Garantie für Richtigkeit und Vollständigkeit.
 \section{Einführung}
 	\subsection{Vorbetrachtung}
 	\begin{itemize}
@@ -101,30 +110,80 @@
 			\end{description}
 		\subsubsection{Kontinuierliche Modelle}
 			\begin{description}
-				\item[Beschreibung:]
-				\item[Zeit:]
-				\item[Zustandsraum:]
-				\item[Input/Output:]
+				\item[Beschreibung:] Unendlich viele Zustandsübergänge im Zeitintervall, Beschreibung meistens durch Differentialgleichungen, z.B: Wasser fliest kontinuierlich in Badewanne
+				\item[Zeit:] $\mathds{R}$
+				\item[Zustandsraum:] $\mathds{R}^{n}$
+				\item[Input/Output:] $\mathds{R}^{n}$
 			\end{description}
+			\begin{center}
+				\includegraphics [scale=0.6]{images/kontinuierliche-modelle.jpg}
+			\end{center}
 		\subsubsection{Diskrete Modelle - schrittweise}
 			\begin{description}
-				\item[Beschreibung:]
-				\item[Zeit:]
-				\item[Zustandsraum:]
-				\item[Input/Output:]
+				\item[Beschreibung:] Endlich viele Zustandsübergänge pro Zeitintervall, Konstante Intervallänge (Alle Modellteile im Gleichtakt), Zustand bleibt bis zum nächsten Takt konstant, Beispiel: Wir füllen Badewanne in regelmäßigen Abständen mit Wassereimern
+				\item[Zeit:]$\mathds{N}$
+				\item[Zustandsraum:] beliebig
+				\item[Input/Output:] beliebig
 			\end{description}
+			\begin{center}
+				\includegraphics [scale=0.6]{images/diskret-schrittweise.jpg}
+			\end{center}
 		\subsubsection{Diskrete Modelle - Ereignisse}
 			\begin{description}
-				\item[Beschreibung:]
-				\item[Zeit:]
-				\item[Zustandsraum:]
-				\item[Input/Output:]
+				\item[Beschreibung:] Endlich viele Zustandsübergänge pro Zeitintervall, Modelle entwicklen sich durch Ereignisse, Zustand bleibt bis zum nächsten Ereigniss konstant, Beispiel: Wir füllen Badewanne immer wenn wir angerufen werden mit Wassereimern
+				\item[Zeit:] $\mathds{R}$
+				\item[Zustandsraum:] beliebig
+				\item[Input/Output:] beliebig
 			\end{description}
+			\begin{center}
+				\includegraphics [scale=0.6]{images/diskret-ereignisse.jpg}
+			\end{center}
 		\subsubsection{Hybride Modelle}
 			\begin{description}
-				\item[Beschreibung:]
-				\item[Zeit:]
-				\item[Zustandsraum:]
-				\item[Input/Output:]
+				\item[Beschreibung:] Kombination aus kontinuierlichen und diskreten Modellen, es gibt sowohl Ereignisse welche durch die Zeit oder durch das Eintreten bestimmter Sitationen. Beispiel: Wir lassen Badewanne normal vollaufen und kippen alle 5 Minuten einen Wassereimer hinzu und immer dann wenn wir angerufen werden.
 			\end{description}
+			\begin{center}
+				\includegraphics [scale=0.6]{images/hybrid.jpg}
+			\end{center}
+	\subsection{VVA von Modellen}
+		\begin{description}
+			\item[Verifikation:] Korrekte Transformation oder Beweisen
+			\item[Validierung:] Korrektes Modell oder Testen
+			\item[Akkreditierung:] Dritte Partei die das Modell (VV) betätigt
+		\end{description}
+\section{Zelluläre Automaten}
+	\subsection{Endliche Automaten}
+		Die Formale Definition: $M=(Q,\Sigma,\Delta,\beta,q_{0},\Lambda)$ mit:
+		\begin{itemize}
+			\item Q endliche Menge an Zuständen
+			\item $\Sigma$ endlichen Eingabealphabet
+			\item $\Delta$ Ausgabealphabet
+			\item $\beta$ Zustandübergangsfunktion: $\beta: Q \times \Sigma \rightarrow Q, \beta(p,a) = q$, mit $p,q \in Q, a\in \Sigma$
+			\item $q_{0}$ Startzustand
+			\item $\Lambda$ Ausgabefunktion
+		\end{itemize}
+		\begin{description}
+			\item[Mealy-Automaten:] Ausgabe nur Abhängig von der Eingabe ab. 
+				\begin{itemize}
+					\item $\Lambda: Q \times \Sigma \rightarrow \Delta$
+					\item $\Lambda(p,a) = b$ mit $p\in Q, a \in \Sigma$, $ b\in \Delta$
+				\end{itemize}
+			\item[Moore-Automaten:] Ausgabe nur Abhängig von dem Zustand ab
+				\begin{itemize}
+					\item $\Lambda: Q \rightarrow \Delta$
+					\item $\Lambda(p) = b$ mit $p\in Q$, $b\in \Delta$					
+				\end{itemize}
+		\end{description}
+	\subsection{Defintion: zelluärer Automat}
+		Die Idee von zellulären Automaten besteht darin mehere Automaten zu koppeln. Die Art der Koppelung bezeichnet man auch als Nachbarschaft. Anstelle von expliziten Eingaben, ändert sich der Zustand eines Automaten in Abhängigkeit von dessen Nachbarn. Nachfolgend die formale Definition eines zellulären Automaten: $CA=(L,N,S,G,G_{init},R)$ mit:
+		\begin{itemize}
+			\item $L$ dem Zellraum, $L \subset \mathds{R}^{d}$ wobei d: d-dimensionaler Raum, somit ist L die Menge der homogen (gleichmaßig) über dem Raum verteilter Zellen. Jede Zelle wird durch ihre Position $r\in L$ bezeichnet.
+			\item $N(r) := \{r+c_{i}:c_{i} \in \mathbf{N}_{diff(b)}, i = 1,\dots,b\}$ mit $\mathbf{N}_{diff(b)}$ der Offset, der die Nachbarn bestimmt, b ist die Anzahl der nächsten Nachbarn im Raum (2 für dimensional, 3 für Dreiecke usw \dots).
+			\item $S$ der endliche Zustandsraum  mit $\forall r \in L : s(r) \in S (s : L \rightarrow S)$
+			\item G der Zustand des zellulären Automaten, $G \in S^{|L|}$,$G := (s(r_{1}),\dots,s(r_{|L|})) = (s(r_{_{i}})_{r_{_{i}}} \in L)$
+			\item $G_{init}$ der initiale Zustand des zellulären Automaten, $G_{init} \in S^{|L|}$
+			\item $R$ die Zustandsüberführungsfunktion
+		\end{itemize}
+		Die Definition scheint jetzt sehr komplex. Wir werden diese jedoch später in einem Beispiel erläutern.
+
 \end{document}
