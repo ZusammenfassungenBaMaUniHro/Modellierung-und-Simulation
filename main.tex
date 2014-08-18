@@ -63,7 +63,7 @@
 \clubpenalty = 10000
 
 \section{Hinweis}
-Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der Vorlesung "Modellierung und Simulation" aus dem Sommer Semester 2014. Die Texte sind an die Vorlesung angelehnt. Die Autoren übernehmen keine Garantie für Richtigkeit und Vollständigkeit.
+Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der Vorlesung "Modellierung und Simulation" aus dem Sommer Semester 2014. Die Texte sind an die Vorlesung angelehnt und entsprechen teilweise dieser. In diesem Fall liegen die Urheberrechte ebenfalls bei Prof. Adelinde Urmacher. Die Autoren übernehmen keine Garantie für Richtigkeit und Vollständigkeit.
 \section{Einführung}
 	\subsection{Vorbetrachtung}
 	\begin{itemize}
@@ -255,9 +255,21 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\item $EIC$ Menge der externen Eingabekoppelungen (Eingabeports)
 			\item $EOC$ Menge der externen Ausgabekoppelungen (Augabeports)
 			\item $IC$ Menge der internen Koppelungen (interne Verbindung von Komponenten)
-			\item $Select: 2^{D} \rightarrow D$ die Funktion, die bestimmt wenn mehere Komponenten ein internes Ereignis ausführen wollen, welche Komponente priorisiert wird
-			
+			\item $Select: 2^{D} \rightarrow D$ die Funktion, die bestimmt wenn mehrere Komponenten ein internes Ereignis ausführen wollen, welche Komponente priorisiert wird
 		\end{itemize}
-	
+	\subsection{Darstellung}
+		Eine übliche Darstellungsform sind geschachtelte Rechtecke. Die Koppelungen werden dabei durch gerichtete Pfeile von und zu Dreiecken die auf den Rändern der Rechtecke positioniert sind und nach außen zeigen wenn sie Ausgabeports und nach innen zeigen wenn sie Eingabeports repräsentieren.
+		\begin{center}
+			\includegraphics[scale=0.6]{images/devs-boxes.jpg}
+		\end{center}
+		Eine weitere Möglichkeit ist die Darstellung in Form eines hierarchisch aufgebauten Modellbaum. Dabei sind jedoch nicht alle nötigen Informationen bekannt die für die Berechnungen auf dem Modell notwendig sind.
+		\begin{center}
+			\includegraphics[scale=0.5]{images/devs-baum.jpg}
+		\end{center}
+		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten5 Modelle Koordinaten und alle atomare Modelle Simulatoren. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erkläutern werden.
+		\begin{center}
+			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
+		\end{center}
+	\subsection{Ausführsemantik}
 	
 \end{document}
