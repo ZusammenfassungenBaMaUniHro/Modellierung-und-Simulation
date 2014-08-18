@@ -241,32 +241,34 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		TODO
 		
 \section{Petrinetze}
-	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die Zentrale Idee hierbei ist, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Bestandteile hiervon sind:
+	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die Zentrale Idee hierbei ist, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Die Bestandteile  sind:
 	\begin{itemize}
 		\item Stellen
 		\item Marken
 		\item Transitionen
 	\end{itemize}
-	\subsection{Disrete Systeme}
-	Petrinetze beschreiben diskrete Systeme, deren Änderung sich in diskreten Schritten
-vollzieht. Es sind eher generelle Eigenschaften des Systems von Interesse - die Verifikation ist wichtiger als die Simulation.
+	\subsection{Diskrete Systeme}
+	Petrinetze beschreiben diskrete Systeme, deren Änderung sich in diskreten Schritten vollzieht. Es sind eher generelle Eigenschaften des Systems von Interesse - die Verifikation ist wichtiger als die Simulation.
 	\begin{description}
 		\item[Sicherheit - Es soll nichts Verbotenes passieren können (bad things never happen)] Anforderungen an die Stellen bzw. Markierungen, z.T. obere und untere Schranken, die die Markierung einer Stelle nicht unter- oder überschreiten darf.
-		\item[Lebendigkeit - Das System soll nicht steckenbleiben (good things eventually happen)] Anforderungen an die Transitionen bzw. an das Schaltverhalten und fordern z.B. dass
-das Hintereinanderschalten bestimmter Transitionen die Markierung bewahrt.
+		\item[Lebendigkeit - Das System soll nicht steckenbleiben (good things eventually happen)] Anforderungen an die Transitionen bzw. an das Schaltverhalten und fordern z.B. dass das Hintereinanderschalten bestimmter Transitionen die Markierung bewahrt.
 	\end{description}
 	\subsection{Definition}
-		Petrinetze sind gerichtete bipartite Graphen
+		Petrinetze sind gerichtete bipartite Graphen. Nachfolgend die formale Definition: 
+		\begin{description}
+			\item[Stellen:] Sind Plätze auf denen Marken liegen können ($S$)
+			\item[Transitionen:] Sind Verbindungen zwischen Stellen welche Marken konsumieren und produzieren können ($T$)
+			\item[Flussrelationen:] Beschreiben die Verbindungen zwischen Stellen und Transitionen ($F$)
+			\item[Netz:] $N=(S,T,F)$, mit $S \cap T = \emptyset$ (die Namen von den Stellen und den Transitionen überschneiden sich nicht), $F \subseteq (S \times T) \cup (T \times S)$ (die Kanten verlaufen zwischen Stellen zu Transitionen und Transitionen zu Stellen)
+		\end{description}
+		Ausgehend von dieser Beschreibung definieren wir ein Stellen-Transitions-System $Y=(S,T,F,K,W,M_{0})$ mit:
 		\begin{itemize}
-			\item mit Knoten (Stellen und Transitionen)
-			\item Ein Netz ist ein Tripel aus 
-				\begin{enumerate}
-					 \item Stellen (S), 
-					 \item Transitionen (T) und 
-					 \item Flussrelationen (F) (die Kanten):\\
- 				\end{enumerate}
-N = ( S , T , F ), mit S ∩ T = ∅, F ⊆ ( S × T ) ∪ ( T × S )
+			\item $(S,T,F)$ ist ein Netz
+			\item $K: S \rightarrow \mathbf{N} \cup \{\infty\}$. weist jeder Stelle eine maximale Kapazität zu
+			\item $W: F \rightarrow \mathbf{N}$, weist jeder Kante ein Gewicht zu
+			\item $M_{0}: S \rightarrow \mathbf{N}_{0}$, weist jeder Stelle einen Anzahl an Ausgangsmarken zu wobei $\forall s \in S : M_{0} \leq K(s)$ (die Anzahl muss unter der definierten Kapazität liegen)
 		\end{itemize}
+
 		Stellen-Transitions-Systeme sind definiert als Y = ( S , T , F , K , W , $M_0$ )
 		\begin{itemize}
 			\item (S,T,F) ist ein Netz
