@@ -233,7 +233,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\begin{center}
 			\includegraphics[scale=0.5]{images/devs-baum.jpg}
 		\end{center}
-		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten5 Modelle Koordinaten und alle atomare Modelle Simulatoren. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erkläutern werden.
+		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten Modelle Koordinaten und alle atomare Modelle Simulatoren. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erläutern werden.
 	\begin{center}
 			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
 	\end{center}
@@ -253,8 +253,8 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\item[Sicherheit - Es soll nichts Verbotenes passieren können (bad things never happen)] Anforderungen an die Stellen bzw. Markierungen, z.T. obere und untere Schranken, die die Markierung einer Stelle nicht unter- oder überschreiten darf.
 		\item[Lebendigkeit - Das System soll nicht steckenbleiben (good things eventually happen)] Anforderungen an die Transitionen bzw. an das Schaltverhalten und fordern z.B. dass das Hintereinanderschalten bestimmter Transitionen die Markierung bewahrt.
 	\end{description}
-	\subsection{Definition}
-		Petrinetze sind gerichtete bipartite Graphen. Nachfolgend die formale Definition: 
+	\subsection{Definition: Netz und Stellen-Transitions-System}
+		Nachfolgend die formale Definition eines Netzes: 
 		\begin{description}
 			\item[Stellen:] Sind Plätze auf denen Marken liegen können ($S$)
 			\item[Transitionen:] Sind Verbindungen zwischen Stellen welche Marken konsumieren und produzieren können ($T$)
@@ -268,16 +268,16 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\item $W: F \rightarrow \mathbf{N}$, weist jeder Kante ein Gewicht zu
 			\item $M_{0}: S \rightarrow \mathbf{N}_{0}$, weist jeder Stelle einen Anzahl an Ausgangsmarken zu wobei $\forall s \in S : M_{0} \leq K(s)$ (die Anzahl muss unter der definierten Kapazität liegen)
 		\end{itemize}
+		Bis jetzt können wir ein statisches Netz definieren, d.h. wir haben noch eine Aktion. Dies werden wir mit den nachfolgenden Definitionen beheben.
+		\begin{description}
+			\item[Vorbereich einer Transtion:] $\bullet x = \{y|(y,x)\in F, y \in S, x \in T\}$, alle Stellen welche  mit einer Transition verbunden sind
+			\item[Nachbereich einer Transtion:] $x\bullet = \{y|(x,y)\in F, y \in S, x \in T\}$, alle Stellen welche von einer Transition verbunden sind
+			\item[Aktiviertheit einer Transtion:]
+				\begin{itemize}
+					\item $\forall s \in \bullet t \cap t \bullet . M(s) \leq K(s) - W(t,s) + W(s,t)$
+				\end{itemize}
+		\end{description}
 
-		Stellen-Transitions-Systeme sind definiert als Y = ( S , T , F , K , W , $M_0$ )
-		\begin{itemize}
-			\item (S,T,F) ist ein Netz
-			\item K: S $\rightarrow \mathds{N} \cup \{\infty\}$, Kapazitäten
-			\item W: F $\rightarrow \mathds{N}$, Kantengewichte
-			\item $M_0$: S $\rightarrow \mathds{N}_0$ (Anfangsmarkierung), wobei $\forall s \in S: M_0(s) K(s)$
-		\end{itemize}
-	
-	
 \section{Prozessalgebren}
 	\subsection{Rückblick}
 		Alle bisherigen Formalismen haben eines gemeinsam: eine statische Kommunikation- und Kompositionsstruktur. So sind bei Zellulären Automaten die Nachbarschaften fest definiert und ändern sich nicht, bei DEVS ändern sich die Koppelungen und die Komponenten nicht und bei Petrinetzen ändert sich nicht die Anzahl an Knoten und Kanten. Nachfolgend werden wir einen Formalismus kennen lernen der besonders geeignet ist Interaktionen/Kommunikation zu modellieren.
