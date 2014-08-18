@@ -271,4 +271,48 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	\end{center}
 \subsection{Ausführsemantik}
 
+\section{Petrinetze}
+	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die Zentrale Idee hierbei ist, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Bestandteile hiervon sind:
+	\begin{itemize}
+		\item Stellen
+		\item Marken
+		\item Transitionen
+	\end{itemize}
+	\subsection{Disrete Systeme}
+	Petrinetze beschreiben diskrete Systeme, deren Änderung sich in diskreten Schritten
+vollzieht. Es sind eher generelle Eigenschaften des Systems von Interesse - die Verifikation ist wichtiger als die Simulation.
+	\begin{description}
+		\item[Sicherheit - Es soll nichts Verbotenes passieren können (bad things never happen)] Anforderungen an die Stellen bzw. Markierungen, z.T. obere und untere Schranken, die die Markierung einer Stelle nicht unter- oder überschreiten darf.
+		\item[Lebendigkeit - Das System soll nicht steckenbleiben (good things eventually happen)] Anforderungen an die Transitionen bzw. an das Schaltverhalten und fordern z.B. dass
+das Hintereinanderschalten bestimmter Transitionen die Markierung bewahrt.
+	\end{description}
+	\subsection{Definition}
+		Petrinetze sind gerichtete bipartite Graphen
+		\begin{itemize}
+			\item mit Knoten (Stellen und Transitionen)
+			\item Ein Netz ist ein Tripel aus 
+				\begin{enumerate}
+					 \item Stellen (S), 
+					 \item Transitionen (T) und 
+					 \item Flussrelationen (F) (die Kanten):\\
+ 				\end{enumerate}
+N = ( S , T , F ), mit S ∩ T = ∅, F ⊆ ( S × T ) ∪ ( T × S )
+		\end{itemize}
+		Stellen-Transitions-Systeme sind definiert als Y = ( S , T , F , K , W , $M_0$ )
+		\begin{itemize}
+			\item (S,T,F) ist ein Netz
+			\item K: S $\rightarrow \mathds{N} \cup \{\infty\}$, Kapazitäten
+			\item W: F $\rightarrow \mathds{N}$, Kantengewichte
+			\item $M_0$: S $\rightarrow \mathds{N}_0$ (Anfangsmarkierung), wobei $\forall s \in S: M_0(s) K(s)$
+		\end{itemize}
+	
+	
+
+
+
+
+
+
+
+
 \end{document}
