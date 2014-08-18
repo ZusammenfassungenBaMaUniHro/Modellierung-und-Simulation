@@ -16,42 +16,10 @@
     linkcolor=blue,  %choose some color if you want links to stand out
 }
 
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
-
-\lstset{ %
-  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{mygreen},    % comment style
-  deletekeywords={...},            % if you want to delete keywords from the given language
-  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-  frame=single,                    % adds a frame around the code
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-  keywordstyle=\color{blue},       % keyword style
-  language=Octave,                 % the language of the code
-  morekeywords={*,...,mean,avg,clone},            % if you want to add more keywords to the set
-  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-  numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
-  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\color{mymauve},     % string literal style
-  tabsize=1,                       % sets default tabsize to 2 spaces
-  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
-}
-
 
 
 \title{Zusammenfassung: Modellierung und Simulation}
-\author{Andreas Ruscheinski}
+\author{Andreas Ruscheinski, Christian Delfs}
 \date{}
 \begin{document}
 \maketitle
@@ -269,8 +237,9 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	\begin{center}
 			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
 	\end{center}
-\subsection{Ausführsemantik}
-
+	\subsection{Ausführsemantik}
+		TODO
+		
 \section{Petrinetze}
 	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die Zentrale Idee hierbei ist, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Bestandteile hiervon sind:
 	\begin{itemize}
@@ -307,8 +276,25 @@ N = ( S , T , F ), mit S ∩ T = ∅, F ⊆ ( S × T ) ∪ ( T × S )
 		\end{itemize}
 	
 	
-
-
+\section{Prozessalgebren}
+	\subsection{Rückblick}
+		Alle bisherigen Formalismen haben eines gemeinsam: eine statische Kommunikation- und Kompositionsstruktur. So sind bei Zellulären Automaten die Nachbarschaften fest definiert und ändern sich nicht, bei DEVS ändern sich die Koppelungen und die Komponenten nicht und bei Petrinetzen ändert sich nicht die Anzahl an Knoten und Kanten. Nachfolgend werden wir einen Formalismus kennen lernen der besonders geeignet ist Interaktionen/Kommunikation zu modellieren.
+	\subsection{$\pi$-Kalkül}
+		Im $\pi$-Kalkül wird das System durch interagierende Prozesse beschrieben. Die Kommunikation der Prozesse geschieht über Kanäle, welche durch Namen definiert sind. Der Kommunikationsinhalt sind immer die Namen von den Kanälen. Nachfolgend wird die Syntax des Kalküls beschrieben.
+		\begin{itemize}
+			\item $P::= 0$ P ist der 0-Prozess (ist terminiert)
+			\item $P||Q$ P und Q laufen parallel
+			\item $c!(v).P$ Prozess wartet bis v auf Kanal c gesendet werden kann und verhält sich dann wie P
+			\item $c?(x).P$ Prozess wartet auf Eingabe auf Kanal c und bindet die Eingabe an die Variable x und verhält sich dann wie P
+			\item $(\nu x).P$ Erstelle Kanal x und fortsetzen wie Prozess P
+			\item $!P$ Prozess findet unendlich oft nebenläufig statt
+			\item $P+Q$ Prozess verhält sich wie P xor Q
+		\end{itemize}
+		Wir wissen nun wie man Prozesse/Systeme beschreibt jedoch können wir keine Reduktionen durchführen d.h. wir können noch keine Prozesse laufen lassen. Deshalb werden folgende Reduktionsregeln eingeführt. Im Zähler steht dabei die Vorbedingung, im Nenner steht dabei die Entwicklung des Prozesses.
+		\begin{description}
+			\item [Nebenläufigkeit $P||Q$:] $\frac{P \rightarrow P'}{P||Q \rightarrow P'||Q}$ d.h. wenn sich der Prozess P zu P' entwickelt ändert sich in der parallel Ausführung der Prozess Q nicht.
+			\item [Kommunikation $c!(v).P || c?(x).Q$:] $\frac{P \rightarrow P'}{P || Q\{v/x\}}$ d.h. $c?(x).Q$ hört auf Kanal c auf ein x, $c!(v).P$ sendet auf Kanal c ein v, so wird in Q alle x durch v ersetzt.
+		\end{description}
 
 
 
