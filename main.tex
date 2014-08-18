@@ -7,6 +7,7 @@
 \usepackage{graphicx} %Grafiken
 \usepackage{listings} %Programmcode
 \usepackage{tikz} %Grafiken malen
+\usetikzlibrary{arrows}
 \usepackage{hyperref}
 \usepackage{dsfont}
 \hypersetup{
@@ -61,7 +62,7 @@
 \clubpenalty = 10000
 
 \section{Hinweis}
-Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der Vorlesung "Modellierung und Simulation" aus dem Sommer Semester 2014. Die Texte sind an die Vorlesung angelehnt. Die Autoren übernehmen keine Garantie für Richtigkeit und Vollständigkeit.
+Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der Vorlesung "Modellierung und Simulation" aus dem Sommer Semester 2014. Die Texte sind an die Vorlesung angelehnt und entsprechen teilweise dieser. In diesem Fall liegen die Urheberrechte ebenfalls bei Prof. Adelinde Urmacher. Die Autoren übernehmen keine Garantie für Richtigkeit und Vollständigkeit.
 \section{Einführung}
 	\subsection{Vorbetrachtung}
 	\begin{itemize}
@@ -184,6 +185,90 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\item $G_{init}$ der initiale Zustand des zellulären Automaten, $G_{init} \in S^{|L|}$
 			\item $R$ die Zustandsüberführungsfunktion
 		\end{itemize}
-		Die Definition scheint jetzt sehr komplex. Wir werden diese jedoch später in einem Beispiel erläutern.
+		Die Definition scheint jetzt sehr komplex. Wir werden diese jedoch später in einem Beispiel erläutern.Die Wahl der Nachbarschaft ist frei wählbar, es gibt jedoch zwei typische Nachbarschaften.\\
+		\begin{enumerate}
+		\item von-Neumann-Nachbarschaft: Nachbarn welche mit einer \glqq langen\grqq\ Seite an die Zelle.
+		\item Moore-Nachbarschaft: alle benachbarten Zellen (alle Zellen welche eine Zelle berühren)
+		\end{enumerate}
+		Die Ränder des Automaten können verschieden behandelt werden. Entweder der Automat endet d.h. die Anzahl der Nachbarn an der Randzellen ist kleiner und die gedachten außerhalb liegenden Zellen haben einen festen Zustand oder die Welt ist ein Torus d.h. der Nachbar der Zelle am Rand ist auf der gegenüberliegenden Seite.\\
+		Bisher wurde nicht geklärt wie wir die Schritte des Automaten berechnen. Mögliche Strategien wären:
+		\begin{itemize}
+			\item pro Schritt wird nur eine Zelle berechnet, Problem: Reihenfolge der Zellen
+			\item alle Zellen pro Schritt berechnet und diese arbeiten auf den aktuellen Zustand der Nachbarn
+			\item alle Zellen pro Schritt aber mit dem Zustand der Nachbarn aus dem vorigen Schritt
+		\end{itemize}
+	\subsubsection{Beispiel}
+		Nachfolgend einige Beispiele für zelluläre Automaten.\\
+		Beispiel 1: 1-dimensionale zelluläre Automaten\\
+		$CA = (L,N,S,G,R)$ mit:
+		\begin{itemize}
+			\item $L \subseteq \mathds{Z}$(der Zellraum ist ein Band)
+			\item $N_{diff(b)} = \{1,-1\}$(der linke und der rechte Nachbar)
+			\item $S =$\{dead,alive\}(Zellen sind tot oder lebendig)
+			\item  $G_{init} = \{s(r_{1},\dots,s(r_{ |l|}))\}\setminus \frac{|L|}{2}:s(r_{i})=$dead und $s(r_{\frac{|L|}{2}})=$ alive (alle Zellen sind tot ausser die Zelle mit dem Index $\frac{|L|}{2}$ sind tot)
+			\item $R=$ die verwendete Regel.
+		\end{itemize}
+		Nachfolgend wird das Prinzip der Regel eingeführt. Nehmen wir an wir wählen eine Zelle auf dem Band mit dem Index $i$. Der Zustand dieser Zelle kann nach der obigen Definition nur von den beiden Nachbarzellen abhängen, da  $N(r) := \{r+c_{i}:c_{i} \in \mathbf{N}_{diff(b)}, i = 1,2\}$ mit $N_{diff(b)} = \{1,-1\}$ folgt $N(i)=\{i-1,i+1\}$, und von sich den eignen Zustand. Somit interessieren uns alle verschiedenen Anordnungen von $i-1,i,i+1$ mit den Belegungen $S={0,1}$ (0 nachfolgend für dead, 1 nachfolgend für alive). So ergeben sich 8 verschiedene Anordnungen. Für jede Anordnung müssen wir angeben wie sich die mittlere Zelle i entwickelt. Dieses geschieht über die Angabe der Regel in Binärcodierung. Nachfolgend ein Beispiel für Regel 42. \\
+		Als erstes stellen wir $[42]_{10}$ als binär da. $42= 0*2^{7}+0*2^{6}+1*2^{5}+0*2^{4}+1*2^{3}+0*2^{2}+1*2^{1}+0*2^{0}=0*128+0*64+1*32+0*16+1*8+0*4+1*2+0*1=[00101010]_{2}$ und tragen das Ergebnis in die Tabelle ein.
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline Muster & 111 & 110 & 101 & 100 & 011 & 010 & 001 & 000 \\ 
+			\hline Neuer Zustand von i & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0    \\ 
+			\hline 
+			\end{tabular} 
+		\end{center}
+		Nachfolgend die Entwicklung des Automaten mit der Länge 5 über 2 Generationen mit der Annahme das die Zellen außerhalb des Randes den Wert 0 haben. In der Startkonfiguration haben alle Zellen haben den Wert 1.
+		\begin{center}
+			\begin{tabular}{|c||c|c|c|c|c||c|}
+			\hline 0 & 1 & 1 & 1 & 1 & 1 & 0 \\ 
+			\hline 0 & 1 & 0 &  0& 0 & 0 & 0 \\ 
+			\hline 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+			\hline 
+			\end{tabular} 
+		\end{center}
+		Für mehre Dimensionen funktioniert dies Analog. Siehe Vorlesungsfolien.
+		\newpage
+\section{Discrete Event System Specification (DEVS)}
+	\subsection{Vergleich zu zellulären Automaten}
+		Im Vergleich zu zellulären Automaten ist in DEVS die Positionierung der einzelnen Bausteine egal und die Kommunikation kann mit belieben Komponenten erfolgen, nicht wie bei den CA mit den unmittelbar anliegenden Nachbarn. Mit DEVS ist es möglich ein System sowohl durch Dekomposition einzelne Bausteine zu verfeinern als auch durch Komposition die Bausteine wieder zusammen zu fassen. Dadurch ist es möglich in DEVS ein System beliebig fein/grob zu spezifizieren. Der Formalismus ist diskret Ereignisorientiert d.h. wir springen von Ereignis zu Ereignis.
+	\subsection{Atomare Modelle}
+		Ein atomares Modell besitzt einen Zustand in diesem das System über einen definierten Zeitraum (auch unendlich lange) verweilt. Der Zustand ändert sich erst wenn ein Ereignis eintritt oder die Verweilzeit abgelaufen ist. Zu dem Ereignis gehört die aktuelle Zeit. Die Kombination von Zustand, Ereignis und der aktuellen Zeit entscheidet in welchem neuen Zustand das System übergeht. Die Zustandsüberführung kann durch ein externes Ereignis(direkte Eingabe) oder ein internes Ereignis(Verweilzeit) ausgelöst werden. Ausgehend durch diese Betrachtung ergibt sich folgende formale Spezifikation: $DEVS = (X,Y,S,\beta_{int},\beta{ext},ta,\lambda)$ mit: 
+		\begin{itemize}
+			\item $X$ die Eingabemenge
+			\item $Y$ die Ausgabemenge
+			\item $S$ die Menge der Zustände
+			\item $ta: S \rightarrow \mathds{R}^{+}_{0,\infty}$ Zeitfortschrittfunktion weist jedem Zustand eine Zeitspanne zu, in die dieser Zustand von sich aus bestehen bleibt bevor ein interner Zustandsübergang ausgelöst wird
+			\item $\beta_{int}: S \rightarrow S$ interne Übergangsfunktion (zeitgetriggerte Ereignisse)
+			\item $\beta_{ext}: Q \times X \rightarrow S$ externe Übergangsfunktion (situative Ereignisse) mit $Q=\{(s,e)|s\in S, 0 \leq e \leq ta(s)\}$
+			\item $\lambda: S \rightarrow Y$ Ausgabefunktion
+		\end{itemize}
+		Nachfolgend zu den Zustandsänderungen ist folgendes zu sagen: bei internen Ereignissen möchte das Modell eine Zustandsüberführung zu einem bestimmten Zeitput ($ta(s) \rightarrow tonie$) durchführen (tonie = time of next event), bei externen Ereignissen bekommt das Modelle eine Nachricht und ändert aufgrund der Eingabe seinen Zustand.\\
+		Die Atomaren Modelle werden wir später nutzen um einzelne Komponenten in den gekoppelten Modellen zu spezifizieren.
+	\subsection{Gekoppelte Modelle}
+		Ein gekoppeltes Modell ist eine Dekompostion eines Atomaren Modell. Nachfolgend die formale Definiton: $DEVS = (X,Y,D,\{M_{d}|d \in D\}.EIC,EOC,IC,Select)$ mit:
+		\begin{itemize}
+			\item $X$ die Eingabemenge
+			\item $Y$ die Ausgabemenge
+			\item $D$ Menge mit Namen von den Komponenten
+			\item $\{M_{d}|d \in D\}$ eine Menge von DEVS-Modellen wobei jedes Modell ein Name $\in D$ besitzt
+			\item $EIC$ Menge der externen Eingabekoppelungen (Eingabeports)
+			\item $EOC$ Menge der externen Ausgabekoppelungen (Augabeports)
+			\item $IC$ Menge der internen Koppelungen (interne Verbindung von Komponenten)
+			\item $Select: 2^{D} \rightarrow D$ die Funktion, die bestimmt wenn mehrere Komponenten ein internes Ereignis ausführen wollen, welche Komponente priorisiert wird
+		\end{itemize}
+	\subsection{Darstellung}
+		Eine übliche Darstellungsform sind geschachtelte Rechtecke. Die Koppelungen werden dabei durch gerichtete Pfeile von und zu Dreiecken die auf den Rändern der Rechtecke positioniert sind und nach außen zeigen wenn sie Ausgabeports und nach innen zeigen wenn sie Eingabeports repräsentieren.
+		\begin{center}
+			\includegraphics[scale=0.6]{images/devs-boxes.jpg}
+		\end{center}
+		Eine weitere Möglichkeit ist die Darstellung in Form eines hierarchisch aufgebauten Modellbaum. Dabei sind jedoch nicht alle nötigen Informationen bekannt die für die Berechnungen auf dem Modell notwendig sind.
+		\begin{center}
+			\includegraphics[scale=0.5]{images/devs-baum.jpg}
+		\end{center}
+		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten5 Modelle Koordinaten und alle atomare Modelle Simulatoren. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erkläutern werden.
+	\begin{center}
+			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
+	\end{center}
+\subsection{Ausführsemantik}
 
 \end{document}
