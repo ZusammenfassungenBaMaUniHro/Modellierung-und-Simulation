@@ -1,4 +1,4 @@
-	\documentclass[11pt, fleqn, a4paper, leqno]{scrartcl} %A4
+\documentclass[11pt, fleqn, a4paper, leqno]{scrartcl} %A4
 \usepackage[utf8x]{inputenc} %Eingabe
 \usepackage[T1]{fontenc} %Font
 
@@ -199,7 +199,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 \section{Discrete Event System Specification (DEVS)}
 	\subsection{Vergleich zu zellulären Automaten}
 		Im Vergleich zu zellulären Automaten ist in DEVS die Positionierung der einzelnen Bausteine egal und die Kommunikation kann mit belieben Komponenten erfolgen, nicht wie bei den CA mit den unmittelbar anliegenden Nachbarn. Mit DEVS ist es möglich ein System sowohl durch Dekomposition einzelne Bausteine zu verfeinern als auch durch Komposition die Bausteine wieder zusammen zu fassen. Dadurch ist es möglich in DEVS ein System beliebig fein/grob zu spezifizieren. Der Formalismus ist diskret Ereignisorientiert d.h. wir springen von Ereignis zu Ereignis.
-	\subsection{Atomare Modelle}
+	\subsection{DEVS: Atomare Modelle}
 		Ein atomares Modell besitzt einen Zustand in diesem das System über einen definierten Zeitraum (auch unendlich lange) verweilt. Der Zustand ändert sich erst wenn ein Ereignis eintritt oder die Verweilzeit abgelaufen ist. Zu dem Ereignis gehört die aktuelle Zeit. Die Kombination von Zustand, Ereignis und der aktuellen Zeit entscheidet in welchem neuen Zustand das System übergeht. Die Zustandsüberführung kann durch ein externes Ereignis(direkte Eingabe) oder ein internes Ereignis(Verweilzeit) ausgelöst werden. Ausgehend durch diese Betrachtung ergibt sich folgende formale Spezifikation: $DEVS = (X,Y,S,\beta_{int},\beta{ext},ta,\lambda)$ mit: 
 		\begin{itemize}
 			\item $X$ die Eingabemenge
@@ -212,7 +212,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\end{itemize}
 		Nachfolgend zu den Zustandsänderungen ist folgendes zu sagen: bei internen Ereignissen möchte das Modell eine Zustandsüberführung zu einem bestimmten Zeitput ($ta(s) \rightarrow tonie$) durchführen (tonie = time of next event), bei externen Ereignissen bekommt das Modelle eine Nachricht und ändert aufgrund der Eingabe seinen Zustand.\\
 		Die Atomaren Modelle werden wir später nutzen um einzelne Komponenten in den gekoppelten Modellen zu spezifizieren.
-	\subsection{Gekoppelte Modelle}
+	\subsection{DEVS: Gekoppelte Modelle}
 		Ein gekoppeltes Modell ist eine Dekompostion eines Atomaren Modell. Nachfolgend die formale Definiton: $DEVS = (X,Y,D,\{M_{d}|d \in D\}.EIC,EOC,IC,Select)$ mit:
 		\begin{itemize}
 			\item $X$ die Eingabemenge
@@ -233,13 +233,37 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\begin{center}
 			\includegraphics[scale=0.5]{images/devs-baum.jpg}
 		\end{center}
-		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten Modelle Koordinaten und alle atomare Modelle Simulatoren. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erläutern werden.
+		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten Modelle Koordinatoren und alle atomare Modelle Simulatoren. Zusätzlich wird ein Root-Koordinator eingeführt welcher die Wurzel des Prozessorbaumes bildet. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erläutern werden.
 	\begin{center}
 			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
 	\end{center}
+	\subsection{PDEVS: Atomare Modelle}
+	PDEVS basiert auf DEVS und kommt ohne die select Funktion aus was die parallele Ausführung von internen Ereignissen erlaubt. Die PDEVS-Modelle sind analog zu den DEVS-Modellen aufgebaut, bestehen also aus gekoppelten Modellen und atomaren Modellen. Die atomaren Modelle in PDEVS sind wie folgt definiert: $M=(X,Y,S,\delta_{int},\delta_{ext},\delta_{con},\lambda,ta)$ mit:
+	\begin{itemize}
+		\item $X = \{(p,v)|p \in inPorts \wedge v \in X_{p}\}$, eine Menge aus Tupeln (Eingabeport,Eingabewert), v ist aus der Menge der möglichen EIngabewerte in p: $X_{p}$
+		\item $Y = \{(p,v)|p \in outPorts \wedge v \in >_{p}\}$, eine Menge aus Tupeln (Ausgabeport,Ausgabewert), v ist aus der Menge der möglichen Ausgabewerte in p: $Y_{p}$
+		\item $S$ die Menge der Zustände
+		\item $\delta_{int}: S \rightarrow S$ die interne Übergangsfunktion
+		\item $\delta_{ext}: Q \times X^{b}  \rightarrow S$ die externe Übergangsfunktion, $Q=\{(s,e)|s \in S \wedge 0 \leq e \le ta(s)\}$ die Menge aus Tupeln von Zuständen und der Zeit ($e = $ elapsedtime) in dem jeweiligen Zustand, $X^{b}$ bezeichnet eine Multimenge aus Elementen in X
+		\item $\delta_{con}: S \times X^{b} \rightarrow S$ die konfluente Übergangsfunktion
+		\item $\lambda: S \rightarrow Y^{b}$ die Ausgabefunktion
+		\item $ta: S \rightarrow \mathds{R}^{+}_{0,\infty}$ die Zeitfortschrittsfunktion
+	\end{itemize}
+	\subsection{PDEVS: Gekoppelte Modelle}
+	Die gekoppelten Modelle sind wie folgt definiert: $C = (X,Y,D,\{M_{d}|d \in D\}, EIC,EOC,IC)$ mit:
+	\begin{itemize}
+		\item $X = \{(p,v)|p \in inPorts \wedge v \in X_{p} \}$
+		\item $Y = \{(p,v)|p \in outPorts \wedge v \in Y_{p} \}$
+		\item $D$ die Menge der Namen der Komponenten
+		\item $\forall d \in D$ gilt: $M_{d} =(X_{d},Y_{d},S,\delta_{int},\delta_{ext},\delta_{con},\lambda,ta)$ ist ein PDEVS-Modell mit $X_{d} = \{(p,v)|p \in inPorts \wedge v \in X_{p}\}$ und $Y_{d} = \{(p,v)|p \in outPorts \wedge v \in Y_{p}\}$
+		\item $EIC \subseteq \{((C,ip_{c},(d,ip_{d}))|ip_{c} \in inputPorts) \wedge d \in D \wedge ip_{d}  \in inPorts_{d} \}$ die Menge der externen Eingabekoppelungen, die die EIngabeports des gekoppelten Modells mit den Eingängen der Komponenten verbindet
+		\item $EOC \subseteq \{((d,op_{d},(C,op_{d}))|pc_{c} \in outPorts) \wedge d \in D \wedge op_{d}  \in outPorts_{d} \}$ die Menge der externen Ausgabekoppelungen, die die Ausgänge der Komponenten mit den Ausgabeports des gekoppelten Modells verbinden
+		\item $IC \subseteq \{((a,op_{a},(b,ip_{b}))|a,b \in D \wedge op_{a}  \in outPorts_{a} \wedge ip_{b} \in inPorts_{b} \}$ die Menge der internen Koppelungen, die Ausgabeports der Komponenten mit den Eingabeports anderer Komponenten verbindet
+	\end{itemize}
+	Nach den ganzen Definitionen erläutern wir nun die Ausführsemantik.
 	\subsection{Ausführsemantik}
-		TODO
-		
+	
+
 \section{Petrinetze}
 	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die Zentrale Idee hierbei ist, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Die Bestandteile  sind:
 	\begin{itemize}
