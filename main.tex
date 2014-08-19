@@ -262,6 +262,33 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	\end{itemize}
 	Nach den ganzen Definitionen erläutern wir nun die Ausführsemantik.
 	\subsection{Ausführsemantik}
+	Nachfolgend gehen wir davon aus, dass das PDEVS Modell aus einem gekoppelten Modell besteht, über welchem nur der Rootcoordinator eingetragen ist.
+	\begin{description}
+	 	\item[Root-Koordinator:] Solange die Simulation nicht beendet ist, führt der Root-Koorinator folgende Schritte aus.
+	 		\begin{enumerate}
+		 		\item Senden von $(*,t)$ zum Kind (ist der Koordinator für das gekoppelte Modell)
+		 		\item Warten auf eine Ausgabe y von dem Kind
+		 		\item Senden einer Eingabe x zum Kind
+		 		\item Warten auf $done(t)$ Nachricht von Kind
+	 		\end{enumerate}
+	 	\item[Koordinator:] Koordinatoren aktivieren die Kinder und leiten die eingehende Nachrichten an Kinder bzw. an höhere Koordinatoren weiter. Je nach Art der Nachricht reagiert der Koordinator anderes.
+	 		\begin{enumerate}
+	 			\item $(*,t)$ Nachricht empfangen
+	 				\begin{enumerate}
+		 				\item Senden von $(*,t)$ an alle imminenten Kinder (Kinder dessen tonie =t)
+		 				\item Warten auf Ausgabe y von den imminenten Kindern
+		 				\item Senden von Ausgabe y zum höheren Koordinator
+		 				\item Warten auf $(x,t)$ Nachricht vom Vater
+	 				\end{enumerate}
+	 			\item Senden von $(x,t)$ Nachrichten an alle Kinder
+	 			\item Warten von $done(t)$ Nachrichten von allen Kindern
+	 			\item Aktualisierung von tonie auf das Minimum von allen Kindern
+	 			\item Senden von $done(tonie)$ zum Vater
+	 		\end{enumerate}
+	 	\item[Simulator:] Simulator macht Zustandsüberführung
+	\end{description}
+	
+	
 	
 
 \section{Petrinetze}
