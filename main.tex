@@ -343,12 +343,42 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\begin{description}
 			\item[Vorbereich einer Transtion:] $\bullet x = \{y|(y,x)\in F, y \in S, x \in T\}$, alle Stellen welche  mit einer Transition verbunden sind
 			\item[Nachbereich einer Transtion:] $x\bullet = \{y|(x,y)\in F, y \in S, x \in T\}$, alle Stellen welche von einer Transition verbunden sind
-			\item[Aktiviertheit einer Transtion:]
+			\item[Aktiviertheit einer Transtion:] \ \\
 				\begin{itemize}
-					\item $\forall s \in \bullet t \cap t \bullet . M(s) \leq K(s) - W(t,s) + W(s,t)$
+					\item $\forall s \in \bullet t \cap t \bullet . M(s) \leq K(s) - W(t,s) + W(s,t)$, wenn für alle Stellen im Vor- und Nachbereich einer Transition gilt: Die Anzahl der Markierungen der Stelle sind $\leq$ Kapazität der Stelle $-$  Anzahl der Marken die die Transition konsumiert $+$ Anzahl der Marken die die Transition auf die Stelle legt
+					\item $\forall s \in \bullet t.M(s) \grq W(s,t)$, wenn für alle Stellen im Vorbereich gilt: Die Anzahl der Marken auf der Stelle $\grq$ Anzahl der Marken die die Transition konsumiert
+					\item $\forall s \in t \bullet \setminus \bullet t.M(s) \leq K(S) - W(t,s)$, wenn für alle Stellen welche sich im Nachbereich befinden und nicht im Vorbereich gilt: die Anzahl der Marken der Stelle $\leq$ Kapazität der Stelle $-$ Anzahl der Marken die die Transition produziert und auf die Stelle legt
 				\end{itemize}
 		\end{description}
-
+	Die Zuständsübergänge ergeben sich wie folgt:
+	\begin{equation*}
+		M_{t}^{'}(s)= \left\{ 
+		\begin{array}{l l}
+			M(s) - W(s,t) & s \in \bullet t \setminus t\bullet \\
+			M(s) + W(t,s) & s \in t \bullet \setminus \bullet t\\
+			M(s)+W(t,s)-W(s,t) & s \in t\bullet \cap \bullet t \\
+			M(s) & sonst
+		\end{array} \right.
+	\end{equation*}
+	Im Simulator werden die aktivierten Transitionen berechnet, wichtig ist dabei die Berücksichtigung von Transitionen für die gilt $\bullet t = \emptyset$ (Transitionen welche nur Markenproduzieren), und zufällig eine Transition geschaltet. Sollte die Menge der aktivierten Transitionen leer sein wird die Simulation abgebrochen.
+	\subsection{Ereichbarkeitsgraph}
+	Standard Petrinetze müssen nicht simuliert werden. Es reicht aus dem Ereichbarkeitsgraph eine Probe zu ziehen, aus den möglichen Wegen durch den Ereichbarkeitsgraph. Er wird dadurch erzeugt, dass, mit der Anfangsmarkierung beginnend, die Menge der in der Markierung aktivierten Transitionen ermittelt und jeweils die Folgemarkierung berechnet wird.
+	\subsection{Weitere Eigenschaften}
+	\begin{description}
+		\item[Konflikte:] Gegeben der Situation das verschiedene Prozesse zum Betriebsmittel konkurieren defieren wie folgt ein Konflikt zwischen zwei Transitionen: Gegeben sei ein Stellen-Transitionssystem mit mind. 2 Transitionen $t_{1}$,$t_{2}$. So stehen diese in Konflikt falls $t_{1}$ und $t_{2}$ schalten könnten, jedoch nicht beide gleichzeitig. Die Entscheidung welche Transition ausgeführt wird, erfolgt dabei nach der Simulationssemantik, nicht deterministisch.
+		\item[Aktivierbar:] Eine Transitionen heißt aktivierbar wenn sie unter mindestens einer Folgemarkierung aktiviert ist.
+		\item[Lebendig:] Eine Transition heißt lebendig, wenn sie unter allen Folgemarkierung aktivierbar ist.
+		\item [Schwach lebendig (deadlockfrei):] Ein Stellen-Transitionssystem heißt schwach lebendig, wenn unter jeder erreichbaren Markierung mindesten eine Transition aktiviert ist. Ein System mit mindestens einer lebendigen Transition ist schwach lebendig.
+		\item [Stark lebendig (lebendig):] Ein Stellen-Transitionssystem heißt stark lebendig, wenn aus jeder erreichbaren Markierung jede Transition aktivierbar ist. Für ein stark lebendiges System mit nichtleerer Transitionsmenge enthält mindestens eine lebendige Transition.
+		\item[Tot:] Ein System ist genau tot, wenn keine Transition aktivierbar ist.
+		\end{description}
+		Ziel dieser Definitionen ist es also Aussagen über Netze zu tätigen ohne diese explizit zu berechnen (Analysen statt Simulation). Dadurch können wir allgemeingültige Aussagen über das System schließen.
+	\subsection{Stochastische Petri-Netze}
+		Ziel von Stochastischen Petri-Netzen ist es Zeit zu modellieren, dadurch ist der Formalismus nicht mehr diskret schrittweise. Idee ist es dabei, dass Transitionen Zeit verbrauchen zum Schalten. Nachfolgend verwenden wir die Exponentialverteilung für die zufallsverteilte Dauer der Schaltzeit. Es gilt die Definition von Petri-Netzen mit einer kleinen Erweiterung: $Y = (S,T,F,M_{0},R)$ mit:
+		\begin{itemize}
+			\item $S,T,F,M$ wie in Petri-Netzen definiert
+			\item $R = \{r_{1},\dots,r_{m}\}$ mit $r_{i} \in R$ ist der Mittelwert der zu der Transition $t_{i$} gehörigen exponentiell verteilten Schaltrate
+		\end{itemize}
 \section{Prozessalgebren}
 	\subsection{Rückblick}
 		Alle bisherigen Formalismen haben eines gemeinsam: eine statische Kommunikation- und Kompositionsstruktur. So sind bei Zellulären Automaten die Nachbarschaften fest definiert und ändern sich nicht, bei DEVS ändern sich die Koppelungen und die Komponenten nicht und bei Petrinetzen ändert sich nicht die Anzahl an Knoten und Kanten. Nachfolgend werden wir einen Formalismus kennen lernen der besonders geeignet ist Interaktionen/Kommunikation zu modellieren.
