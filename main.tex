@@ -263,6 +263,9 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	Nach den ganzen Definitionen erläutern wir nun die Ausführsemantik.
 	\subsection{Ausführsemantik}
 	Nachfolgend gehen wir davon aus, dass das PDEVS Modell aus einem gekoppelten Modell besteht, über welchem nur der Rootcoordinator eingetragen ist.
+	\begin{center}
+		\includegraphics[scale=0.5]{images/devs-protokoll.jpg}
+	\end{center}
 	\begin{description}
 	 	\item[Root-Koordinator:] Solange die Simulation nicht beendet ist, führt der Root-Koorinator folgende Schritte aus.
 	 		\begin{enumerate}
@@ -292,14 +295,21 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			 			\item Die Ausgabe $\lambda(S)$ berechnen
 			 			\item Ausgabe an Vater senden
 			 			\item Warten auf $(x,t)$ Nachricht 
+			 			\item Wenn x Nachricht leer ist (Keine Eingabe von Aussen): Interner Übergang $\delta_{int}(S)$
+			 			\item Sonst: Konfluenter Übergang (Eingabe von Aussen $\delta_{con}$ 
 		 			\end{enumerate}
-		 		
-		 		\item $(x,t)$ empfangen
+		 		\item Wenn $(x,t)$ empfangen
+		 			\begin{enumerate}
+			 			\item Berechnen der vergangenen Zeit $e = t - t_{last}$ (Empfangene Zeit - Zeit des letzten Event des Knotens)
+			 			\item Externer Übergang $\delta_{ext}(S,e,x)$
+		 			\end{enumerate}
+		 		\item Aktualisieren der Zeit des letzten Events $t_{last} = t$
+		 		\item Aktualisieren der Zeit des nächsten Events $tonie = t$
+		 		\item Senden von $done(tonie)$ zum Vater
 	 		\end{enumerate}
 	\end{description}
-	
-	
-	
+	\subsection{Vergleich von DEVS und PDEVS}
+	PDEVS ermöglicht es uns parallele Ereignisse (interne und externe Ereignisse gleichzeitig) einfacher zu beschreiben. In PDEVS gibt es keine Select-Funktion welche die Prioritäten der Komponeten angibt. Mehre Komponenten können gleichzeitig einen intern Zustandsübergang ausführen. Kollisionen von internen und externen Ereignissen wird auf atomarer Ebene aufgelöst durch $\delta_{conf}$. Der Spezialfall, dass beide Generatoren zu gleichen Zeit eine Ausgabe erzeugen können, führt zur Erweiterung $X^{b}$
 
 \section{Petrinetze}
 	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die Zentrale Idee hierbei ist, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Die Bestandteile  sind:
