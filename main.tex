@@ -41,29 +41,52 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	\end{itemize}
 	\subsection{Definitionen}
 	\begin{description}
-		\item[System:] Ein System besteht aus Eingaben, Ausgaben und dem Verhalten. Man unterscheidet in Umgebung eines Systems und das Innere eines Systems. Die Umgebung gilt als Abgrenzung. Das Innere beschreibt die Zustände, Komponenten und die Relationen der einzelnen Komponenten. Es muss für jedes System die Systemelemente, Kommunikationsstrukturen und der Veränderung von Werten über die Zeit identifiziert werden.
-		\item[Modell:] Ein Modell ist eine Abstraktion eines Systems. Wir stellen ein Modell nur zusammen mit einem System und einem Experiment da. \glqq A model (M) for a system (S) and an experiment (E) is anything to which E can be applied to answer questions about (S).\grqq
-		\item[Experiment:] Ein Experiment beinhaltet eine klare Fragestellung (Was soll beantwortet werden?). An ein Experiment sind verschiedene Kriterien gestellt z.b Wiederholbarkeit(unter identischen Voraussetzungen sollen identische Experimente zu den identischen Ergebnissen führen). Wichtig ist dabei die Dokumentation des Experimenten indem die Voraussetzungen, Umgebungsparameter und die Ergebnisse fest gehalten werden. \glqq An experiment is the process of extracting data from a system by excerting it through its input.\grqq
+		\item[System:] Ein System besteht aus Eingaben, Ausgaben und dem Verhalten. Man unterscheidet in Umgebung eines Systems und das Innere eines Systems. Die Umgebung gilt als Abgrenzung. Das Innere beschreibt die Zustände, Komponenten und die Relationen der einzelnen Komponenten. Es müssen für jedes System die Systemelemente, Kommunikationsstrukturen und Veränderungen von Werten über die Zeit identifiziert werden.
+		\item[Modell:] Ein Modell ist eine Abstraktion eines Systems. Wir stellen ein Modell nur zusammen mit einem System und einem Experiment da.\\
+		 \glqq A model (M) for a system (S) and an experiment (E) is anything to which E can be applied to answer questions about (S).\grqq
+		\item[Experiment:] Ein Experiment beinhaltet eine klare Fragestellung (Was soll beantwortet werden?). An ein Experiment sind verschiedene Kriterien gestellt z.b Wiederholbarkeit(unter identischen Voraussetzungen sollen identische Experimente zu den identischen Ergebnissen führen). Wichtig ist dabei die Dokumentation der Experimente, indem die Voraussetzungen, Umgebungsparameter und Ergebnisse fest gehalten werden.\\
+		\glqq An experiment is the process of extracting data from a system by excerting it through its input.\grqq
 		\item[Simulation:] Eine Simulation ist ein Experiment welches auf einem Modell ausgeführt wird. 
 		\item[Computer Modell:] Ein durch einen Computer ausführbares Modell, d.h. definiert in einer durch den Computer interpretierbaren Syntax.
 		\item[Computersimulation:] Ein durch einen Computer ausführbares Experiment mit einem computerbasierten Modell.
 	\end{description}
 \section{Modellierung, Modelle und Sichten}
 	\subsection{Wie kommt man von einem System zum Modell?}
-		Man unterscheidet dabei zwei grundlegende Vorgehensweisen: induktiv und deduktiv. Bei der induktiven Modellbildung wird das Modell ausgehen von Experimenten und dem Beobachten realer Systeme unter Auswertung dieser Daten gewonnen. Bei der deduktiven Modellbildung wird das Modell ausgehen von Hypothesen, Lehrmeinungen, Gesetzen und Prinzipien gewonnen. Modellierung ist also der Prozess, das Wissen über ein System anordnet. Es werden die gebildeten Modelle noch weiter unterschieden in Gedankenmodelle (ausgedacht), Verbalmodelle (Modelle auf Basis von Texten und Gesprächen bzw. Beschreibungen) und Formal Modelle (Formale Spezifikation des Modelles durch Logik o.ä). Diese Modelle lassen sich noch weiter in zwei große Bereiche unterteilen, Realmodelle (welche ausgehend von der Realität gebildet werden) und Ikonische Modelle (dienen zur Veranschaulichung von Sachverhalten, erklären diesen jedoch nicht).
+		Man unterscheidet dabei zwei grundlegende Vorgehensweisen: induktiv und deduktiv.\\
+		Bei der induktiven Modellbildung wird das Modell ausgehen von Experimenten und dem Beobachten realer Systeme unter Auswertung dieser Daten gewonnen.\\
+		Bei der deduktiven Modellbildung wird das Modell ausgehen von Hypothesen, Lehrmeinungen, Gesetzen und Prinzipien gewonnen.\\
+		Modellierung ist also der Prozess, der das Wissen über ein System anordnet. Es werden die gebildeten Modelle noch weiter unterschieden in 
+		\begin{itemize}
+			\item Gedankenmodelle (ausgedacht), 
+			\item Verbalmodelle (Modelle auf Basis von Texten und Gesprächen bzw. Beschreibungen) und 
+			\item Formal Modelle (Formale Spezifikation des Modelles durch Logik o.ä). 	
+		\end{itemize}		
+		Diese Modelle lassen sich noch weiter in zwei große Bereiche unterteilen:\\
+		Realmodelle (welche ausgehend von der Realität gebildet werden) und \\
+		Ikonische Modelle (dienen zur Veranschaulichung von Sachverhalten, erklären diesen jedoch nicht).
 	\subsection{Modellentwicklung}
-		Die Modellentwicklung wird unter Berücksichtigung von verschieden Fragen durchgeführt. Typische Fragen dabei sind: Was sind wichtige Variablen und wie ist deren Beziehung?, Wie sind die Variablen skaliert?, Ist die Dynamik eher kontinuierlich oder diskret?, Welche Rolle spielt Stochastik?, Was ist interessant? Was sind die Elemente eines Systems?. Man unterscheidet dabei die Variablen in qualitativ skalierte Variablen (incl. Constraints) und quantitative Variablen. Qualitative Variablen haben nur eine begrenzte Anzahl an Merkmalsausprägungen (Geschlecht, Religion) wobei quantitative Variablen angeben wie viel, wo von existiert.
+		Die Modellentwicklung wird unter Berücksichtigung von verschieden Fragen durchgeführt. Typische Fragen dabei sind:\\
+		Was sind wichtige Variablen und wie ist deren Beziehung?, Wie sind die Variablen skaliert?, Ist die Dynamik eher kontinuierlich oder diskret?, Welche Rolle spielt Stochastik?, Was ist interessant? Was sind die Elemente eines Systems?.\\
+		Man unterscheidet dabei die Variablen in qualitativ skalierte Variablen (incl. Constraints) und quantitative Variablen. Qualitative Variablen haben nur eine begrenzte Anzahl an Merkmalsausprägungen (Geschlecht, Religion) wobei quantitative Variablen angeben wie viel, wo von existiert.
 	\subsection{Sichten auf Systeme}
 	\begin{description}
-		\item[Warteschlagenmodelle:]Die Vorstellung des Modells beruht auf der Abarbeitung einer Folge von Aufträgen durch n Bedieneinheiten, wobei die Verteilung der Aufträge und Bearbeitungsdauern variieren können. Beispiele: die immer vollen Warteschlangen in der Mensa, am Flughafen oder im Kaufland und warum muss ich trotz Termin beim Arzt immer warten?
-		\item[Makromodelle:] Die Vorstellung des Modells beruht auf der Betrachtung der angenommenen Werte der Variablen. Beispiel: Entwicklung der Bevölkerung
-		\item[Mikromodelle:] Die Vorstellung des Modells beruht auf einer differenzierten Betrachtung der Entitäten. Beispiel: Eine Menge von Haushalten und ihr Einkommen
-		\item[Agentenmodelle:] Die Vorstellung des Modells beruht, ähnlich den Mikromodellen, auf einer differenzierten Betrachtung wobei jedoch jedes Element sich über die Laufzeit verändern kann und dabei miteinander kommunizieren. Beispiel: Überlebenssimulation auf einer Insel mit verschiedenen Überlebenden.
-		\item[Räumliche Modelle:] Die Vorstellung des Modells beruht darauf das alle Entitäten einen Ort haben und sich ggf. Bewegen. Beispiel: Geosimulation, Moleküle
-		\item[Mehrebenenmodelle:] Die Vorstellung des Modells beruht darauf das mehrere Organisationsebenen miteinander verbunden sind und jede Ebene eigene Eigenschaften und Verhaltensmuster aufweisen. Beispiel: Simulation des Menschlichen Organismus (Moleküle, Zellen, Zellverbände, Organe, Organismen)
-		\item[Mehrskalenmodelle:]  Die Vorstellung des Modells beruht darauf, dass sich die Elemente verändern, wobei jedoch die Veränderungen weit auseinander liegen. Im allgemeinen stehen räumliche und zeitliche Skalen in Verbindung. Beispiel: Simulation der Plattentektonik
-		\item[Strukturdynamische Modelle:] Die Vorstellung des Modells beruht darauf das die Elemente ihr Interaktionsmuster und ggf. ihre Schnittstellen verändern. Beispiel: Simulation einer Serverfarm, Was passiert wenn 2 Server ausfallen?
-		\item[Veränderungen:] Die Veränderung der Eigenschaften kann dabei empirisch ermittelt worden sein, durch eine Formel abgebildet oder durch Wahrscheinlichkeiten modelliert werden.
+		\item[Warteschlagenmodelle:]beruhen auf der Abarbeitung einer Folge von Aufträgen durch n Bedieneinheiten, wobei die Verteilung der Aufträge und Bearbeitungsdauern variieren können.\\
+		Beispiele: die immer vollen Warteschlangen in der Mensa, am Flughafen oder im Kaufland und warum muss ich trotz Termin beim Arzt immer warten?
+		\item[Makromodelle:]beruhen auf der Betrachtung der angenommenen Werte der Variablen.\\
+		Beispiel: Entwicklung der Bevölkerung
+		\item[Mikromodelle:] beruhen auf einer differenzierten Betrachtung der Entitäten.\\
+		Beispiel: Eine Menge von Haushalten und ihr Einkommen
+		\item[Agentenmodelle:] beruhen, ähnlich den Mikromodellen, auf einer differenzierten Betrachtung wobei jedoch jedes Element sich über die Laufzeit verändern kann und dabei miteinander kommunizieren.\\
+		Beispiel: Überlebenssimulation auf einer Insel mit verschiedenen Überlebenden.
+		\item[Räumliche Modelle:] beruhen darauf das alle Entitäten einen Ort haben und sich ggf. Bewegen.\\
+		Beispiel: Geosimulation, Moleküle
+		\item[Mehrebenenmodelle:] beruhen darauf das mehrere Organisationsebenen miteinander verbunden sind und jede Ebene eigene Eigenschaften und Verhaltensmuster aufweisen.\\
+		Beispiel: Simulation des Menschlichen Organismus (Moleküle, Zellen, Zellverbände, Organe, Organismen)
+		\item[Mehrskalenmodelle:]  beruhen darauf, dass sich die Elemente verändern, wobei jedoch die Veränderungen weit auseinander liegen. Im allgemeinen stehen räumliche und zeitliche Skalen in Verbindung.\\
+		 Beispiel: Simulation der Plattentektonik
+		\item[Strukturdynamische Modelle:] beruhen darauf das die Elemente ihr Interaktionsmuster und ggf. ihre Schnittstellen verändern.\\
+		Beispiel: Simulation einer Serverfarm, Was passiert wenn 2 Server ausfallen?
+		\item[Veränderungen:] von Eigenschaften können dabei empirisch ermittelt worden sein - durch eine Formel abgebildet oder durch Wahrscheinlichkeiten modelliert.
 	\end{description}
 	\subsection{Zeitbasen}
 		\subsubsection{Grundlegende Zeit Definition}
@@ -79,17 +102,22 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\end{description}
 		\subsubsection{Kontinuierliche Modelle}
 			\begin{description}
-				\item[Beschreibung:] Unendlich viele Zustandsübergänge im Zeitintervall, Beschreibung meistens durch Differentialgleichungen, z.B: Wasser fliest kontinuierlich in Badewanne
+				\item[Beschreibung:] Unendlich viele Zustandsübergänge im Zeitintervall, Beschreibung meistens durch Differentialgleichungen.\\
+				Beispiel: Wasser fließt kontinuierlich in eine Badewanne.
 				\item[Zeit:] $\mathds{R}$
 				\item[Zustandsraum:] $\mathds{R}^{n}$
 				\item[Input/Output:] $\mathds{R}^{n}$
 			\end{description}
 			\begin{center}
 				\includegraphics [scale=0.6]{images/kontinuierliche-modelle.jpg}
-			\end{center}
+			\end{center}				
 		\subsubsection{Diskrete Modelle - schrittweise}
 			\begin{description}
-				\item[Beschreibung:] Endlich viele Zustandsübergänge pro Zeitintervall, Konstante Intervallänge (Alle Modellteile im Gleichtakt), Zustand bleibt bis zum nächsten Takt konstant, Beispiel: Wir füllen Badewanne in regelmäßigen Abständen mit Wassereimern
+				\item[Beschreibung:] Endlich viele Zustandsübergänge pro Zeitintervall, Konstante Intervallänge (Alle Modellteile im Gleichtakt), Zustand bleibt bis zum nächsten Takt konstant.\\
+				Beispiel: Wir befüllen eine Badewanne in regelmäßigen Abständen mit Wassereimern.
+				
+				\newpage
+				
 				\item[Zeit:]$\mathds{N}$
 				\item[Zustandsraum:] beliebig
 				\item[Input/Output:] beliebig
@@ -99,7 +127,8 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\end{center}
 		\subsubsection{Diskrete Modelle - Ereignisse}
 			\begin{description}
-				\item[Beschreibung:] Endlich viele Zustandsübergänge pro Zeitintervall, Modelle entwicklen sich durch Ereignisse, Zustand bleibt bis zum nächsten Ereigniss konstant, Beispiel: Wir füllen Badewanne mit Wassereimern immer dann, wenn wir angerufen werden
+				\item[Beschreibung:] Endlich viele Zustandsübergänge pro Zeitintervall, Modelle entwickeln sich durch Ereignisse, Zustand bleibt bis zum nächsten Ereignis konstant.\\
+				Beispiel: Wir füllen Badewanne mit Wassereimern immer dann auf, wenn wir angerufen werden.
 				\item[Zeit:] $\mathds{R}$
 				\item[Zustandsraum:] beliebig
 				\item[Input/Output:] beliebig
@@ -109,7 +138,9 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\end{center}
 		\subsubsection{Hybride Modelle}
 			\begin{description}
-				\item[Beschreibung:] Kombination aus kontinuierlichen und diskreten Modellen, es gibt sowohl Ereignisse welche durch die Zeit oder durch das Eintreten bestimmter Sitationen. Beispiel: Wir lassen Badewanne normal vollaufen und kippen alle 5 Minuten einen Wassereimer hinzu und immer dann wenn wir angerufen werden.
+				\item[Beschreibung:] Kombination aus kontinuierlichen und diskreten Modellen.\\
+				Es gibt sowohl Ereignisse, welche durch die Zeit oder durch das Eintreten bestimmter Situationen stattfinden.\\
+				Beispiel: Wir lassen Badewanne normal vollaufen und kippen alle 5 Minuten einen Wassereimer hinzu und immer dann wenn wir angerufen werden.
 			\end{description}
 			\begin{center}
 				\includegraphics [scale=0.6]{images/hybrid.jpg}
@@ -153,9 +184,10 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\item $G_{init}$ der initiale Zustand des zellulären Automaten, $G_{init} \in S^{|L|}$
 			\item $R$ die Zustandsüberführungsfunktion
 		\end{itemize}
-		Die Definition scheint jetzt sehr komplex. Wir werden diese jedoch später in einem Beispiel erläutern.Die Wahl der Nachbarschaft ist frei wählbar, es gibt jedoch zwei typische Nachbarschaften.\\
+		Die Definition scheint jetzt sehr komplex. Wir werden diese jedoch später in einem Beispiel erläutern.\\
+		Die Wahl der Nachbarschaft ist frei wählbar, es gibt jedoch zwei typische Nachbarschaften.\\
 		\begin{enumerate}
-		\item von-Neumann-Nachbarschaft: Nachbarn welche mit einer \glqq langen\grqq\ Seite an die Zelle.
+		\item von-Neumann-Nachbarschaft: Nachbarn welche mit einer \glqq langen\grqq\ Seite an die Zelle stoßen.
 		\item Moore-Nachbarschaft: alle benachbarten Zellen (alle Zellen welche eine Zelle berühren)
 		\end{enumerate}
 		Die Ränder des Automaten können verschieden behandelt werden. Entweder der Automat endet d.h. die Anzahl der Nachbarn an der Randzellen ist kleiner und die gedachten außerhalb liegenden Zellen haben einen festen Zustand oder die Welt ist ein Torus d.h. der Nachbar der Zelle am Rand ist auf der gegenüberliegenden Seite.\\
