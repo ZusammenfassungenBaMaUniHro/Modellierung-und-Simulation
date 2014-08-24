@@ -50,7 +50,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	\end{description}
 \section{Modellierung, Modelle und Sichten}
 	\subsection{Wie kommt man von einem System zum Modell?}
-		Man unterscheidet dabei zwei grundlegende Vorgehensweisen: induktiv und deduktiv. Bei der induktiven Modellbildung wird das Modell ausgehen von Experimenten und dem Beobachten realer Systeme unter Auswertung dieser Daten gewonnen. Bei der deduktiven Modellbildung wird das Modell ausgehen von Hypothesen, Lehrmeinungen, Gesetzen und Prinzipien gewonnen. Modellierung ist also der Prozess, der das Wissen über ein System anordnet. Es werden die gebildeten Modelle noch weiter unterschieden in Gedankenmodelle (ausgedacht), Verbalmodelle (Modelle auf Basis von Texten und Gesprächen bzw. Beschreibungen) und Formal Modelle (Formale Spezifikation des Modelles durch Logik o.ä). Diese Modelle lassen sich noch weiter in zwei große Bereiche unterteilen, Realmodelle (welche ausgehend von der Realität gebildet werden) und Ikonische Modelle (dienen zur Veranschaulichung von Sachverhalten, erklären diesen jedoch nicht).
+		Man unterscheidet dabei zwei grundlegende Vorgehensweisen: induktiv und deduktiv. Bei der induktiven Modellbildung wird das Modell ausgehen von Experimenten und dem Beobachten realer Systeme unter Auswertung dieser Daten gewonnen. Bei der deduktiven Modellbildung wird das Modell ausgehen von Hypothesen, Lehrmeinungen, Gesetzen und Prinzipien gewonnen. Modellierung ist also der Prozess, das Wissen über ein System anordnet. Es werden die gebildeten Modelle noch weiter unterschieden in Gedankenmodelle (ausgedacht), Verbalmodelle (Modelle auf Basis von Texten und Gesprächen bzw. Beschreibungen) und Formal Modelle (Formale Spezifikation des Modelles durch Logik o.ä). Diese Modelle lassen sich noch weiter in zwei große Bereiche unterteilen, Realmodelle (welche ausgehend von der Realität gebildet werden) und Ikonische Modelle (dienen zur Veranschaulichung von Sachverhalten, erklären diesen jedoch nicht).
 	\subsection{Modellentwicklung}
 		Die Modellentwicklung wird unter Berücksichtigung von verschieden Fragen durchgeführt. Typische Fragen dabei sind: Was sind wichtige Variablen und wie ist deren Beziehung?, Wie sind die Variablen skaliert?, Ist die Dynamik eher kontinuierlich oder diskret?, Welche Rolle spielt Stochastik?, Was ist interessant? Was sind die Elemente eines Systems?. Man unterscheidet dabei die Variablen in qualitativ skalierte Variablen (incl. Constraints) und quantitative Variablen. Qualitative Variablen haben nur eine begrenzte Anzahl an Merkmalsausprägungen (Geschlecht, Religion) wobei quantitative Variablen angeben wie viel, wo von existiert.
 	\subsection{Sichten auf Systeme}
@@ -199,6 +199,19 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 \section{Discrete Event System Specification (DEVS)}
 	\subsection{Vergleich zu zellulären Automaten}
 		Im Vergleich zu zellulären Automaten ist in DEVS die Positionierung der einzelnen Bausteine egal und die Kommunikation kann mit belieben Komponenten erfolgen, nicht wie bei den CA mit den unmittelbar anliegenden Nachbarn. Mit DEVS ist es möglich ein System sowohl durch Dekomposition einzelne Bausteine zu verfeinern als auch durch Komposition die Bausteine wieder zusammen zu fassen. Dadurch ist es möglich in DEVS ein System beliebig fein/grob zu spezifizieren. Der Formalismus ist diskret Ereignisorientiert d.h. wir springen von Ereignis zu Ereignis.
+	\subsection{Darstellung}
+		Eine übliche Darstellungsform sind geschachtelte Rechtecke. Die Koppelungen werden dabei durch gerichtete Pfeile von und zu Dreiecken die auf den Rändern der Rechtecke positioniert sind und nach außen zeigen wenn sie Ausgabeports und nach innen zeigen wenn sie Eingabeports repräsentieren.
+		\begin{center}
+			\includegraphics[scale=0.6]{images/devs-boxes.jpg}
+		\end{center}
+		Eine weitere Möglichkeit ist die Darstellung in Form eines hierarchisch aufgebauten Modellbaum. Dabei sind jedoch nicht alle nötigen Informationen bekannt die für die Berechnungen auf dem Modell notwendig sind.
+		\begin{center}
+			\includegraphics[scale=0.5]{images/devs-baum.jpg}
+		\end{center}
+		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten Modelle Koordinatoren und alle atomare Modelle Simulatoren. Zusätzlich wird ein Root-Koordinator eingeführt welcher die Wurzel des Prozessorbaumes bildet. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erläutern werden.
+	\begin{center}
+			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
+	\end{center}
 	\subsection{DEVS: Atomare Modelle}
 		Ein atomares Modell besitzt einen Zustand in diesem das System über einen definierten Zeitraum (auch unendlich lange) verweilt. Der Zustand ändert sich erst wenn ein Ereignis eintritt oder die Verweilzeit abgelaufen ist. Zu dem Ereignis gehört die aktuelle Zeit. Die Kombination von Zustand, Ereignis und der aktuellen Zeit entscheidet in welchem neuen Zustand das System übergeht. Die Zustandsüberführung kann durch ein externes Ereignis(direkte Eingabe) oder ein internes Ereignis(Verweilzeit) ausgelöst werden. Ausgehend durch diese Betrachtung ergibt sich folgende formale Spezifikation: $DEVS = (X,Y,S,\beta_{int},\beta{ext},ta,\lambda)$ mit: 
 		\begin{itemize}
@@ -224,19 +237,6 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\item $IC$ Menge der internen Koppelungen (interne Verbindung von Komponenten)
 			\item $Select: 2^{D} \rightarrow D$ die Funktion, die bestimmt wenn mehrere Komponenten ein internes Ereignis ausführen wollen, welche Komponente priorisiert wird
 		\end{itemize}
-	\subsection{Darstellung}
-		Eine übliche Darstellungsform sind geschachtelte Rechtecke. Die Koppelungen werden dabei durch gerichtete Pfeile von und zu Dreiecken die auf den Rändern der Rechtecke positioniert sind und nach außen zeigen wenn sie Ausgabeports und nach innen zeigen wenn sie Eingabeports repräsentieren.
-		\begin{center}
-			\includegraphics[scale=0.6]{images/devs-boxes.jpg}
-		\end{center}
-		Eine weitere Möglichkeit ist die Darstellung in Form eines hierarchisch aufgebauten Modellbaum. Dabei sind jedoch nicht alle nötigen Informationen bekannt die für die Berechnungen auf dem Modell notwendig sind.
-		\begin{center}
-			\includegraphics[scale=0.5]{images/devs-baum.jpg}
-		\end{center}
-		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten Modelle Koordinatoren und alle atomare Modelle Simulatoren. Zusätzlich wird ein Root-Koordinator eingeführt welcher die Wurzel des Prozessorbaumes bildet. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erläutern werden.
-	\begin{center}
-			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
-	\end{center}
 	\subsection{PDEVS: Atomare Modelle}
 	PDEVS basiert auf DEVS und kommt ohne die select Funktion aus was die parallele Ausführung von internen Ereignissen erlaubt. Die PDEVS-Modelle sind analog zu den DEVS-Modellen aufgebaut, bestehen also aus gekoppelten Modellen und atomaren Modellen. Die atomaren Modelle in PDEVS sind wie folgt definiert: $M=(X,Y,S,\delta_{int},\delta_{ext},\delta_{con},\lambda,ta)$ mit:
 	\begin{itemize}
@@ -377,8 +377,9 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		Ziel von Stochastischen Petri-Netzen ist es Zeit zu modellieren, dadurch ist der Formalismus nicht mehr diskret schrittweise. Idee ist es dabei, dass Transitionen Zeit verbrauchen zum Schalten. Nachfolgend verwenden wir die Exponentialverteilung für die zufallsverteilte Dauer der Schaltzeit. Es gilt die Definition von Petri-Netzen mit einer kleinen Erweiterung: $Y = (S,T,F,M_{0},R)$ mit:
 		\begin{itemize}
 			\item $S,T,F,M$ wie in Petri-Netzen definiert
-			\item $R = \{r_{1},\dots,r_{m}\}$ mit $r_{i} \in R$ ist der Mittelwert der zu der Transition $t_{i$} gehörigen exponentiell verteilten Schaltrate
+			\item $R = \{r_{1},\dots,r_{m}\}$ mit $r_{i} \in R$ ist der Mittelwert der zu der Transition $t_{i}$ gehörigen exponentiell verteilten Schaltrate
 		\end{itemize}
+		
 \section{Prozessalgebren}
 	\subsection{Rückblick}
 		Alle bisherigen Formalismen haben eines gemeinsam: eine statische Kommunikation- und Kompositionsstruktur. So sind bei Zellulären Automaten die Nachbarschaften fest definiert und ändern sich nicht, bei DEVS ändern sich die Koppelungen und die Komponenten nicht und bei Petrinetzen ändert sich nicht die Anzahl an Knoten und Kanten. Nachfolgend werden wir einen Formalismus kennen lernen der besonders geeignet ist Interaktionen/Kommunikation zu modellieren.
@@ -393,15 +394,101 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\item $!P$ Prozess findet unendlich oft nebenläufig statt
 			\item $P+Q$ Prozess verhält sich wie P xor Q
 		\end{itemize}
+		Die freien Namen (fn)ergeben sich wie folgt:
+		\begin{itemize}
+			\item $fn(0) = \emptyset$
+			\item $fn(c!(v).P) = fn(P) \cup \{c,v\}$
+			\item $fn(c?(v).P) = fn(P\setminus\{x\}) \cup \{c\} $
+		\end{itemize}
 		Wir wissen nun wie man Prozesse/Systeme beschreibt jedoch können wir keine Reduktionen durchführen d.h. wir können noch keine Prozesse laufen lassen. Deshalb werden folgende Reduktionsregeln eingeführt. Im Zähler steht dabei die Vorbedingung, im Nenner steht dabei die Entwicklung des Prozesses.
 		\begin{description}
 			\item [Nebenläufigkeit $P||Q$:] $\frac{P \rightarrow P'}{P||Q \rightarrow P'||Q}$ d.h. wenn sich der Prozess P zu P' entwickelt ändert sich in der parallel Ausführung der Prozess Q nicht.
 			\item [Kommunikation $c!(v).P || c?(x).Q$:] $\frac{P \rightarrow P'}{P || Q\{v/x\}}$ d.h. $c?(x).Q$ hört auf Kanal c auf ein x, $c!(v).P$ sendet auf Kanal c ein v, so wird in Q alle x durch v ersetzt.
 		\end{description}
-
-
-
-
-
+	\subsection{Stochastisches $\pi$-Kalkül}
+\section{Stochastik}
+	\subsection{Warum?}
+	Viele diskrete Modelle beinhalten Variablen, deren Werte einer stochastischen Verteilung folgen. So sind diese Stochastischen Modelle, Modelle mit Zufallsaspekten. Die resultierenden Simulationsexperimenten mit stochastischen Modellen Zufallsexperimente. Aus der Sicht der Anwendung ist es interessant geeignete stochastische Verteilungen und Parameter für die Modellvariablen zu finden. Genutzt werden können dafür Beobachtungen am realen System bzw. Erfahrungswerte. Ein Zufallsexperiment ist ein Prozess, dessen Ergebnis nicht mit Sicherheit angegeben werden kann. Eine Zufallsvariable ist eine Funktion, die das Ergebniss eines Zufallsexperiment ausdrückt.
+	\subsection{Zufallsvariablen}
+	Die Verteilungsfunktion $F(x)$ einer Zufallsvaraible $X$ ist wie folgt definiert: $F(x) = P(X\leq x)$ mit $-\infty \le x \le \infty$ mit folgenden Eigenschaften:
+	\begin{itemize}
+		\item $0 \leq F(x) \leq 1$ für alle x
+		\item $F(x)$ ist monoton wachsend, es gilt also für bel. $x_{1}, x_{2}, x_{1} \leq x_{2}$: $F(x_{1}) \leq F(x_{2})$
+		\item $\lim_{x \to \infty} F(x) = 1$ und $\lim_{x \to -\infty} F(x) = 0 $
+	\end{itemize}
+	Man unterscheidet in diskreten und kontinuierlichen Zufallsvariablen.
+	\begin{description}
+		\item[diskret:] Eine Zufallsvariable ist diskret, wenn sie in jedem beschränkten Intervall nur endlich viele Ausprägungen annehmen kann.
+		\item[kontinuierlich:] Eine Zufallsvariable ist diskret, wenn sie in jedem beschränkten Intervall über abzählbar viele Ausprägungen annehmen kann.
+	\end{description}
+	Wie Wahrscheinlichkeitsdichtefunktion gibt an wie groß die Wahrscheinlichkeit ist, dass die Zufallsvariable X einen Wert in einem Intervall $[x,x+\delta x]$ annimmt. Die Dichtefunktion ist wie folgt definiert: $P(X\in[x,x+\delta x]) = \int_{x}^{x+\delta x} f(y) dy$. Die Verteilungsfunktion $F(x)$ gibt an, mit welcher Wahrscheinlichkeit eine Zufallsvariable höchstens einen Wert x annimmt. $F(x) = P(X\in[\inf,x]) = \int_{-\inf}^{x} f(y) dy$.
+	\subsection{Wahrscheinlichkeits Verteilungen}
+		\subsubsection{Uniforme Verteilung }
+		\begin{itemize}
+			\item Es tritt jedes Ereignis mit der gleichen Wahrscheinlichkeit ein.
+			\item $f(x) = \left\{ 
+				\begin{array}{ l l}
+					\frac{1}{b-a} & $wenn $ a \leq x \leq b \\
+					0 & $sonst$
+				\end{array} \right.$
+			\item $F(x) = \left\{ 
+				\begin{array}{ l l}
+					0 & $wenn $ x \le a \\
+					\frac{x-a}{b-a} & $wenn $ a \leq x \leq b \\
+					1 & $wenn $ x \ge b
+				\end{array} \right.$
+			\item Ist Grundlage zur Generierung von Zufallszahlen anderer Verteilungen.
+		\end{itemize}
+		\subsubsection{Gleichverteilung U(0,1)}
+		\begin{itemize}
+			\item Spezialfall der Uniformen Verteilung mit a = 0 und b =1
+			\item $f(x) = \left\{ 
+				\begin{array}{ l l}
+					1 & $wenn $ 0 \leq x \leq 1 \\
+					0 & $sonst$
+				\end{array} \right.$
+			\item $F(x) = \left\{ 
+				\begin{array}{ l l}
+					0 & $wenn $ x \le 0 \\
+					\int_{0}^{x} f(y) = \int_{0}^{x} 1 = x & $wenn $ 0 \leq x \leq 1 \\
+					1 & $sonst$
+				\end{array} \right.$
+			\item Beispiel: Würfel, jedes mögliche Ereignis hat die Wahrscheinlichkeit $\frac{1}{6}$
+		\end{itemize}
+		
+		\subsubsection{Exponentialverteilung}
+		\begin{itemize}
+			\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
+			\item $f(t) = \left\{ 
+				\begin{array}{ l l}
+					\lambda * \exp^{-\lambda*t} $ falls $ t \ge 0 \\
+					0 & $sonst$
+				\end{array} \right.$
+			\item $F(t) = \int_{0}^{t} \lambda * \exp^{-\lambda*t} = 1 - \exp^{-\lambda*t}$
+			\item Beispiel: Häufig genutzt für die Modellierung von Dauern von Zufälligen Zeitintervallen wie Länge eines Telefongespräches, Zeit zwischen 2 Anrufen
+		\end{itemize}
+	
+		\subsubsection{Normalverteilung}
+		\begin{itemize}
+			\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
+			\item $f(x) = \frac{1}{\sqrt{2*\pi*\sigma^{2}}}*\exp^{\frac{-(x-\mu)^{2}}{2*\sigma^{2}}}$
+			\item Beispiel: Häufig genutzt für die Modellierung von Beobachtungsfehlern (viele Werte sind exakt gemessen, einige deutlich zu groß andere deutlich zu klein)
+		\end{itemize}
+	
+		\subsubsection{Passionverteilung}
+		\begin{itemize}
+			\item $f(x) = \left\{ 
+				\begin{array}{ l l}
+					\frac{\exp^{-\lambda}*\lambda^{x}}{x!}$ falls $x\in \{0,1,2\}\\
+					0 & $sonst$
+				\end{array} \right.$
+			\item $F(t) = \left\{ 
+				\begin{array}{l l}
+					0 & $falls $ x \le 0 \\
+					\exp^{-\lambda}*\sum_{i=0}^{|x|} \frac{\lambda^{i}}{i!} & $ falls $ x \geq 0
+				\end{array}	\right.$
+			\item Beispiel: Anzahl von Ereignissen, die in einem Zeitintervall auftreten, falls die Ereignisse sich mit konstanter Rate ereignen (Anzahl von Kunden einer Bank pro Stunde)
+		\end{itemize}
+	\subsection{Bestimmung von Verteilungen}		
 
 \end{document}
