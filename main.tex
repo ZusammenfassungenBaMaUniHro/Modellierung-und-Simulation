@@ -469,72 +469,141 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	Die Dichtefunktion ist wie folgt definiert: $P(X\in[x,x+\delta x]) = \int_{x}^{x+\delta x} f(y) dy$.\\
 	Die Verteilungsfunktion $F(x)$ gibt an, mit welcher Wahrscheinlichkeit eine Zufallsvariable höchstens einen Wert x annimmt. $F(x) = P(X\in[\inf,x]) = \int_{-\inf}^{x} f(y) dy$.
 	\subsection{Wahrscheinlichkeits Verteilungen}
-		\subsubsection{Uniforme Verteilung }
-		\begin{itemize}
-			\item Es tritt jedes Ereignis mit der gleichen Wahrscheinlichkeit ein.
-			\item $f(x) = \left\{ 
-				\begin{array}{ l l}
-					\frac{1}{b-a} & $wenn $ a \leq x \leq b \\
-					0 & $sonst$
-				\end{array} \right.$
-			\item $F(x) = \left\{ 
-				\begin{array}{ l l}
-					0 & $wenn $ x \le a \\
-					\frac{x-a}{b-a} & $wenn $ a \leq x \leq b \\
-					1 & $wenn $ x \ge b
-				\end{array} \right.$
-			\item Ist Grundlage zur Generierung von Zufallszahlen anderer Verteilungen.
-		\end{itemize}
-		\subsubsection{Gleichverteilung U(0,1)}
-		\begin{itemize}
-			\item Spezialfall der Uniformen Verteilung mit a = 0 und b =1
-			\item $f(x) = \left\{ 
-				\begin{array}{ l l}
-					1 & $wenn $ 0 \leq x \leq 1 \\
-					0 & $sonst$
-				\end{array} \right.$
-			\item $F(x) = \left\{ 
-				\begin{array}{ l l}
-					0 & $wenn $ x \le 0 \\
-					\int_{0}^{x} f(y) = \int_{0}^{x} 1 = x & $wenn $ 0 \leq x \leq 1 \\
-					1 & $sonst$
-				\end{array} \right.$
-			\item Beispiel: Würfel, jedes mögliche Ereignis hat die Wahrscheinlichkeit $\frac{1}{6}$
-		\end{itemize}
-		
-		\subsubsection{Exponentialverteilung}
-		\begin{itemize}
-			\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
-			\item $f(t) = \left\{ 
-				\begin{array}{ l l}
-					\lambda * \exp^{-\lambda*t} $ falls $ t \ge 0 \\
-					0 & $sonst$
-				\end{array} \right.$
-			\item $F(t) = \int_{0}^{t} \lambda * \exp^{-\lambda*t} = 1 - \exp^{-\lambda*t}$
-			\item Beispiel: Häufig genutzt für die Modellierung von Dauern von Zufälligen Zeitintervallen wie Länge eines Telefongespräches, Zeit zwischen 2 Anrufen
-		\end{itemize}
-	
-		\subsubsection{Normalverteilung}
-		\begin{itemize}
-			\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
-			\item $f(x) = \frac{1}{\sqrt{2*\pi*\sigma^{2}}}*\exp^{\frac{-(x-\mu)^{2}}{2*\sigma^{2}}}$
-			\item Beispiel: Häufig genutzt für die Modellierung von Beobachtungsfehlern (viele Werte sind exakt gemessen, einige deutlich zu groß andere deutlich zu klein)
-		\end{itemize}
-	
-		\subsubsection{Passionverteilung}
-		\begin{itemize}
-			\item $f(x) = \left\{ 
-				\begin{array}{ l l}
-					\frac{\exp^{-\lambda}*\lambda^{x}}{x!}$ falls $x\in \{0,1,2\}\\
-					0 & $sonst$
-				\end{array} \right.$
-			\item $F(t) = \left\{ 
-				\begin{array}{l l}
-					0 & $falls $ x \le 0 \\
-					\exp^{-\lambda}*\sum_{i=0}^{|x|} \frac{\lambda^{i}}{i!} & $ falls $ x \geq 0
-				\end{array}	\right.$
-			\item Beispiel: Anzahl von Ereignissen, die in einem Zeitintervall auftreten, falls die Ereignisse sich mit konstanter Rate ereignen (Anzahl von Kunden einer Bank pro Stunde)
-		\end{itemize}
-	\subsection{Bestimmung von Verteilungen}		
+	\subsubsection{Uniforme Verteilung }
+	\begin{itemize}
+		\item Es tritt jedes Ereignis mit der gleichen Wahrscheinlichkeit ein.
+		\item $f(x) = \left\{ 
+			\begin{array}{ l l}
+				\frac{1}{b-a} & $wenn $ a \leq x \leq b \\
+				0 & $sonst$
+			\end{array} \right.$
+		\item $F(x) = \left\{ 
+			\begin{array}{ l l}
+				0 & $wenn $ x \le a \\
+				\frac{x-a}{b-a} & $wenn $ a \leq x \leq b \\
+				1 & $wenn $ x \ge b
+			\end{array} \right.$
+		\item Ist Grundlage zur Generierung von Zufallszahlen anderer Verteilungen.
+	\end{itemize}
+	\subsubsection{Gleichverteilung U(0,1)}
+	\begin{itemize}
+		\item Spezialfall der Uniformen Verteilung mit a = 0 und b =1
+		\item $f(x) = \left\{ 
+			\begin{array}{ l l}
+				1 & $wenn $ 0 \leq x \leq 1 \\
+				0 & $sonst$
+			\end{array} \right.$
+		\item $F(x) = \left\{ 
+			\begin{array}{ l l}
+				0 & $wenn $ x \le 0 \\
+				\int_{0}^{x} f(y) = \int_{0}^{x} 1 = x & $wenn $ 0 \leq x \leq 1 \\
+				1 & $sonst$
+			\end{array} \right.$
+		\item Beispiel: Würfel, jedes mögliche Ereignis hat die Wahrscheinlichkeit $\frac{1}{6}$
+	\end{itemize}
+	\subsubsection{Exponentialverteilung}
+	\begin{itemize}
+		\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
+		\item $f(t) = \left\{ 
+			\begin{array}{ l l}
+				\lambda * \exp^{-\lambda*t} $ falls $ t \ge 0 \\
+				0 & $sonst$
+			\end{array} \right.$
+		\item $F(t) = \int_{0}^{t} \lambda * \exp^{-\lambda*t} = 1 - \exp^{-\lambda*t}$
+		\item Beispiel: Häufig genutzt für die Modellierung von Dauern von Zufälligen Zeitintervallen wie Länge eines Telefongespräches, Zeit zwischen 2 Anrufen
+	\end{itemize}
+	\subsubsection{Normalverteilung}
+	\begin{itemize}
+		\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
+		\item $f(x) = \frac{1}{\sqrt{2*\pi*\sigma^{2}}}*\exp^{\frac{-(x-\mu)^{2}}{2*\sigma^{2}}}$
+		\item Beispiel: Häufig genutzt für die Modellierung von Beobachtungsfehlern (viele Werte sind exakt gemessen, einige deutlich zu groß andere deutlich zu klein)
+	\end{itemize}
 
+	\subsubsection{Passionverteilung}
+	\begin{itemize}
+		\item $f(x) = \left\{ 
+			\begin{array}{ l l}
+				\frac{\exp^{-\lambda}*\lambda^{x}}{x!}$ falls $x\in \{0,1,2\}\\
+				0 & $sonst$
+			\end{array} \right.$
+		\item $F(t) = \left\{ 
+			\begin{array}{l l}
+				0 & $falls $ x \le 0 \\
+				\exp^{-\lambda}*\sum_{i=0}^{|x|} \frac{\lambda^{i}}{i!} & $ falls $ x \geq 0
+			\end{array}	\right.$
+		\item Beispiel: Anzahl von Ereignissen, die in einem Zeitintervall auftreten, falls die Ereignisse sich mit konstanter Rate ereignen (Anzahl von Kunden einer Bank pro Stunde)
+	\end{itemize}
+	\subsection{Bestimmung von Verteilungen}	
+\section{kontinuierliche Modelle}
+	\subsection{Einleitung}
+		Bei der diskreten Modellierung (ZA,DEVS,StoPi, Petrinetze) wird der Fokus auf einzelne Zustände und Zustandsübergänge gelegt. Dies ist aber nicht für alle Fragestellungen die richtige Art der Modellierung. Die Alternative ist, dass das Verhalten von Systemen als kontinuierlich angenommen wird. Bei vielen Systemen werden Angaben in Form des \glqq Anwachsens\grqq und \glqq Schrumpfens\grqq von Zahlen über die Zeit gemacht.\\
+		Markante Beispiele sind:
+		\begin{itemize}
+			\item Beschleunigung von Fahrzeugen
+			\item Kraftstoffverbrauch
+			\item wirtschaftliches Wachstum
+			\item Populationsdynamiken (Demographie)
+			\item Das Volllaufenlassen einer Badewanne
+			\item Räuber Beute Modell
+		\end{itemize}
+	\subsection{Modellierung und Simulation}
+		Im Gegensatz zur diskret-ereignisorientierten Modellierung und Simulation gibt es bei der kontinuierlichen nun unendlich viele Zustandsänderungen in einem Zeitintervall.\\
+		Das Verhalten kann einfach als Differenzgleichungsmodell beschrieben werden und die Modellierung erfolgt mit Differentialsystemen.\\
+		Bezüglich der Parameter gibt es hierbei zwei verschiedene Fälle:
+			\begin{enumerate}
+				\item Modelle mit konzentrierten Parametern: ohne räumlichen, nur zeitliche Veränderungen, d.h. gewöhnliche Differentialsysteme
+				\item Modelle mit verteilten Parametern: mit räumlichen und zeitlichen Veränderungen, d.h. partielle Differentialsysteme (Diskretisierung des Raums in Gitterelemente)
+			\end{enumerate}
+		Eine weitere Form der Modellierung sind Integrationsverfahren.
+	\subsection{Formalismen}
+		\subsubsection{ODE - Ordinary Differential Equations}
+		Eine gewöhnliche Differentialgleichung ist eine Differentialgleichung, bei der zu einer gesuchten Funktion nur Ableitungen nach genau einer Variablen auftreten. Ob überhaupt eine Lösung existiert, lässt sich anhand einiger Kriterien erkennen. Die Differentialgleichung selbst reicht im Allgemeinen nicht aus, um die Lösung eindeutig zu bestimmen.\\
+	Beispielsweise ist der grundsätzliche Bewegungsablauf aller schwingenden Pendel gleich und kann durch eine einzige Differentialgleichung beschrieben werden. Der konkrete Bewegungsablauf ist jedoch durch die Rand- oder Anfangsbedingung(en) (wann wurde das Pendel angestoßen, und wie groß ist die Anfangsauslenkung) bestimmt.\\
+		\subsubsection{PDE}
+		
+		\subsubsection{Verwendung}
+
+	\subsection{Blockdiagramme}
+		Blockdiagramme sind die graphische Repräsentation von Differentialgleichungen in Simulink, wobei das zentrale Element der Integratorblock ist. Das folgende Beispiel zeigt das Modellierte Verhalten von drei Generationen:\\
+		TODO: Bild einfügen
+		
+	\subsection{Lösungsfindung durch verschiedene Verfahren}
+		Bekanntermaßen geschieht die Darstellung mittels eines Gleichungssystems. Es gibt unendlich viele Zustandsübergänge pro Zeitintervall. Eine Lösung lässt sich deshalb im Allgemeinen nicht analytisch sondern durch numerische Integration (näherungsweise Berechnen) bestimmten.
+			\subsubsection{Taylorreihe}
+				$p(x) = \sum\limits_{v=0}^{\infty}\frac{f^{(v)}(a)}{v!}(x-a)^v$\\
+				Eine Funktion, die unendlich oft differenzierbar ist, bildet eine Taylorreihe. Taylorreihen werden benutzt, um den Wert einer Funktion an einer Stelle näherungsweise zu berechnen (approximieren).\\
+				Die Funktion p(x) ist eine Taylorreihe mit unendlich vielen Gliedern. Die Stelle \textbf{a} ist die Entwicklungsstelle. Die Entwicklungsstelle ist die Stelle, in deren Umgebung uns das Verhalten der Funktion interessiert.\\
+				Die \glqq Ordnung\grqq entspricht der Genauigkeit der Berechnung, die sich durch die Anzahl der aufsummierten Glieder ergibt.\\
+				Die Schrittweite der Taylorreihe ist \textbf{(x-a)}.\\
+				Die Fehlerabschätzung erfolgt mit dem n+1 ten Glied bei einer Ordnung von n, ebenso entspricht die Fehlergrößenordnung der Ordnung des n+1 ten Gliedes.\\
+				Die Annäherung erfolgt bis zum Glied n. Eine Daumenregel besagt, dass Ordnung n verwendet wird, wenn der größte Berechnungsfehler in der Anwendung $10^{-n}$ betragen darf.\\
+				Die Glieder einer höheren Ordnung werden immer kleiner. Da die Anzahl an Stellen bei einer Fließkommazahl jedoch beschränkt sind, kann dies zu Problemen führen. Bei 32 Bit kann es bei ca. 6 Dezimalstellen schon zu Problemen kommen. Zusätzlich können sich Additionsfehler über die Gesamtberechnung fortsetzen.
+			\subsubsection{Integration}
+				Die Integration dient der Berechnung bestimmter Zustandswerte. Diese liegen auf der Zeitachse mit einer Schrittweite h auseinander. Die Annäherung erfolgt durch den aktuellen Zustand, Veränderungen an diesem und der Schrittweite.
+				\begin{description}
+					\item[Forward-Euler] benutzt den einfachen Ansatz des Abschneidens der Taylorreihe nach dem linearen Term. Es werden nur vergangene Werte zur Berechnung verwendet.
+					\item[Backward-Euler] verwendet die selbe Idee, aber das Ergebnis des nächsten Schrittes wird verwendet. Dies ist durch Algebraische Schleifen möglich bspw. mittels Fixpunktberechnung. Zusätzlich werden aktuelle Werte ebenfalls zur Berechnung verwendet (Implizite Integrationstechnik).\\
+					Vorteil: andere Stabilität als Fwd-Euler, d.h. es können hiermit Modelle berechnet werden bei denen Fwd-Euler „versagt“.
+					\item[Euler-Heun-Verfahren] ?
+					\item[Runge-Kutta] verwendet mehrere Approximationen, die im Anschluss gemittelt werden.
+				\end{description}
+		\subsection{Schrittweiten}
+			Bei den Schrittweiten gilt es abzuwägen zwischen Großen oder Kleinen.\\
+			Bei großen sind auch größere Fehler möglich (bspw. Vorzeichenwechsel), dafür ist die Berechnung schneller. Kleine Schrittweiten haben zwar kleinere Fehler sind dafür aber auch aufwändiger zu Berechnen.\\
+		\subsection{Ordnung}
+			Die Verwendung einer hohen Ordnung führt zu kleineren Fehlern. Dagegen spricht die aufwändigere Berechnung und dass es meistens eine Beschränkung der darstellbaren Nachkommastellen gibt.\\
+			Eine niedrige Ordnung ist zwar schneller zu berechnen, dafür sind die Fehler aber auch größer.
+
+
+
+	
+\section{Todo}
+	\begin{itemize}
+		\item freie Namen beim pi-kalkül
+		\item stochastik beim pi-kalkül
+		\item wozu braucht man den neu-operator-branch
+		\item was ist PDE???
+		\item Verwendungsbild einfügen 08-kontinuierlich.pdf Seite 10/46
+		\item 3 Generationen bild einfügen bei Blockdiagramme 08-kontinuierlich.pdf Seite 16/46
+	\end{itemize}			
 \end{document}
