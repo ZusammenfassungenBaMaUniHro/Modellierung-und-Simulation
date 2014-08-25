@@ -599,5 +599,29 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\subsection{Probleme}
 			Das grundlegende Problem ist, dass es sich bei der Numerischen Integration lediglich um eine Approximation und keine Lösung handelt. Da es unterschiedliche Verfahren gibt kann es auch zu unterschiedlichen Problemen kommen und zu Unterschieden in der Stabilität. Zusätzlich ist es notwendig, dass Wissen über die Gleichungen vorhanden ist, um das richtige Verfahren zu wählen.\\
 			Folglich müssen ggf. mehrere Verfahren verwendet und Ergebnisse verglichen werden. Es kann zu lokalen und globalen Fehlern kommen. Bezüglich der Stabilität unterscheidet man in die Kategorien \glqq A-stabil\grqq, \glqq Fwd-Euler\grqq und \glqq Bwd-Euler\grqq.
-	
+
+	\section{Hybride Modellierung und Simulation}
+		\subsection{Einleitung}
+			Kontinuierliches Verhalten wird mittels Differentialsysteme spezifiziert. Ereignisorientiertes mit Hilfe von diskreten Ereignissystemen. Im Hybriden werden diskrete und kontinuierliche Teile gekoppelt. Erfolgt eine Änderung in den kontinuierlichen Zustandsvariablen, löst dies Ereignisse aus. So kann es zu sprunghaften Zustandsänderungen, bzw. Unstetigkeiten der kontinuierlichen Variablen durch Ereignisse kommen.\\
+			\subsection{Formalismen}
+				Für die hybride Modellierung und Simulation ist es notwendig verschiedene Formalismen zu koppeln. Eine Möglichkeit wäre, dass die Kontrolle in State Charts und die kontinuierliche Dynamik in Simulink erfolgt - \glqq Multi-Formalism Approaches\grqq.\\
+				Erweiterte diskrete Formalismen: Hybride Automaten, hybride Petrinetze.\\
+				Erweiterte kontinuierliche Formalismen: Blockdiagramme in Simulink (beinhalten diskrete Blöcke)\\
+				Wenn Ereignisse in kontinuierlichen Simulationen stattfinden, ist eine Zwei Phasen Ausführung von Bedeutung. Diese ist alternierend diskret-ereignisorientiert und kontinuierlich. Wichtig ist, dass zwischen Zeitgetriggerten und Situationsgetriggerten Ereignissen unterschieden wird!
+				\subsubsection{Hybride Automaten}
+					TODO: Bild hier einfügen.
+			\subsection{Simulation}
+				Es erfolgt eine kontinuierliche Simulation von Ereignis zu Ereignis. Während der numerischen Integration werden Zustandsereignisse erkannt. Diese Ereignisse werden daraufhin ausgeführt.\\
+				Zustandsereignisse können durch Umformung der Bedingungen auf Nulldurchgänge erkannt werden. Bei der Integration müssen diese Nulldurchgänge erkannt werden. Die genaue Zeit des Zustandseregnisses kann durch Approximationsverfahren aufgefunden werden.\\
+				Dafür bietet sich die Bisection-Methode als auch Regula Falsi an. Bei der erster erfolgt eine sukzessive Halbierung des Integrationsintervalls und Test in welcher Hälfte der Nulldurchgang liegt. Regula Falsi legt einfach eine Gerade durch die zwei Integrationspunkte.
+			\subsection{Zusammenfassung}
+				Hybride Systeme sind Kombinationen von kontinuierlichen und diskreten. Es Sind häufig kontinuierliche Systeme, welche diskret, ereignisorientiert gesteuert werden.\\
+				Das Verhalten ist in Phasen strukturiert: Innerhalb einer Phase verhält  es sich Kontinuierliche; von einer Phase zur nächsten ändern sich die Variablen diskret und die Differentialgleichungen ändern sich.
+
+
+
+
+
+
+
 \end{document}
