@@ -593,9 +593,12 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\subsection{Ordnung}
 			Die Verwendung einer hohen Ordnung führt zu kleineren Fehlern. Dagegen spricht die aufwändigere Berechnung und dass es meistens eine Beschränkung der darstellbaren Nachkommastellen gibt.\\
 			Eine niedrige Ordnung ist zwar schneller zu berechnen, dafür sind die Fehler aber auch größer.
-
-
-
+		\subsection{Automatische Schrittweitensteuerung:}
+			Hierbei wird die Genauigkeit vorgegeben und die Schrittweite entsprechend angepasst. Ist die Genauigkeit bereits erreicht, wird die Schrittweite vergrößert - wurde die geforderte Genauigkeit noch nicht erreicht, wird die Schrittweite verkleinert.\\
+			Es erfolgt also eine Fehlerabschätzung abhängig vom Bedarf. Beispielsweise werden zwei Schrittweiten mit einem Verfahren verwendet. Wenn das Ergebnis für h = 2h, dann kann die Schrittweite vergrößert, sonst verkleinert werden.
+		\subsection{Probleme}
+			Das grundlegende Problem ist, dass es sich bei der Numerischen Integration lediglich um eine Approximation und keine Lösung handelt. Da es unterschiedliche Verfahren gibt kann es auch zu unterschiedlichen Problemen kommen und zu Unterschieden in der Stabilität. Zusätzlich ist es notwendig, dass Wissen über die Gleichungen vorhanden ist, um das richtige Verfahren zu wählen.\\
+			Folglich müssen ggf. mehrere Verfahren verwendet und Ergebnisse verglichen werden. Es kann zu lokalen und globalen Fehlern kommen. Bezüglich der Stabilität unterscheidet man in die Kategorien \glqq A-stabil\grqq, \glqq Fwd-Euler\grqq und \glqq Bwd-Euler\grqq.
 	
 \section{Todo}
 	\begin{itemize}
