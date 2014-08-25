@@ -177,7 +177,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	\subsection{Defintion: zelluärer Automat}
 		Die Idee von zellulären Automaten besteht darin mehere Automaten zu koppeln. Die Art der Koppelung bezeichnet man auch als Nachbarschaft. Anstelle von expliziten Eingaben, ändert sich der Zustand eines Automaten in Abhängigkeit von dessen Nachbarn. Nachfolgend ist die formale Definition eines zellulären Automaten: $CA=(L,N,S,G,G_{init},R)$ definiert durch:
 		\begin{itemize}
-			\item $L$ dem Zellraum, $L \subset \mathds{R}^{d}$ wobei d: d-dimensionaler Raum, somit ist L die Menge der homogen (gleichmaßig) über dem Raum verteilter Zellen. Jede Zelle wird durch ihre Position $r\in L$ bezeichnet.
+			\item $L$ - der Zellraum, $L \subset \mathds{R}^{d}$ wobei d: d-dimensionaler Raum, somit ist L die Menge der homogen (gleichmaßig) über dem Raum verteilten Zellen. Jede Zelle wird durch ihre Position $r\in L$ bezeichnet.
 			\item $N(r) := \{r+c_{i}:c_{i} \in \mathbf{N}_{diff(b)}, i = 1,\dots,b\}$ mit $\mathbf{N}_{diff(b)}$ der Offset, der die Nachbarn bestimmt, b ist die Anzahl der nächsten Nachbarn im Raum (2 für dimensional, 3 für Dreiecke usw \dots).
 			\item $S$ der endliche Zustandsraum  mit $\forall r \in L : s(r) \in S (s : L \rightarrow S)$
 			\item G der Zustand des zellulären Automaten, $G \in S^{|L|}$,$G := (s(r_{1}),\dots,s(r_{|L|})) = (s(r_{_{i}})_{r_{_{i}}} \in L)$
@@ -205,10 +205,13 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			\item $L \subseteq \mathds{Z}$(der Zellraum ist ein Band)
 			\item $N_{diff(b)} = \{1,-1\}$(der linke und der rechte Nachbar)
 			\item $S =$\{dead,alive\}(Zellen sind tot oder lebendig)
-			\item  $G_{init} = \{s(r_{1},\dots,s(r_{ |l|}))\}\setminus \frac{|L|}{2}:s(r_{i})=$dead und $s(r_{\frac{|L|}{2}})=$ alive (alle Zellen sind tot ausser die Zelle mit dem Index $\frac{|L|}{2}$ sind tot)
+			\item  $G_{init} = \{s(r_{1},\dots,s(r_{ |l|}))\}\setminus \frac{|L|}{2}:s(r_{i})=$dead und $s(r_{\frac{|L|}{2}})=$ alive\\ 
+			(alle Zellen sind tot außer die Zelle mit dem Index $\frac{|L|}{2}$)
 			\item $R=$ die verwendete Regel.
 		\end{itemize}
-		Nachfolgend wird das Prinzip der Regel eingeführt. Nehmen wir an wir wählen eine Zelle auf dem Band mit dem Index $i$. Der Zustand dieser Zelle kann nach der obigen Definition nur von den beiden Nachbarzellen abhängen, da  $N(r) := \{r+c_{i}:c_{i} \in \mathbf{N}_{diff(b)}, i = 1,2\}$ mit $N_{diff(b)} = \{1,-1\}$ folgt $N(i)=\{i-1,i+1\}$, und von sich den eignen Zustand. Somit interessieren uns alle verschiedenen Anordnungen von $i-1,i,i+1$ mit den Belegungen $S={0,1}$ (0 nachfolgend für dead, 1 nachfolgend für alive). So ergeben sich 8 verschiedene Anordnungen. Für jede Anordnung müssen wir angeben wie sich die mittlere Zelle i entwickelt. Dieses geschieht über die Angabe der Regel in Binärcodierung. Nachfolgend ein Beispiel für Regel 42. \\
+		Nachfolgend wird das Prinzip der Regel eingeführt.\\
+		Nehmen wir an wir wählen eine Zelle auf dem Band mit dem Index $i$. Der Zustand dieser Zelle kann nach der obigen Definition nur von den beiden Nachbarzellen abhängen.
+		Da  $N(r) := \{r+c_{i}:c_{i} \in \mathbf{N}_{diff(b)}, i = 1,2\}$ mit $N_{diff(b)} = \{1,-1\}$ folgt $N(i)=\{i-1,i+1\}$, und von sich den eignen Zustand. Somit interessieren uns alle verschiedenen Anordnungen von $i-1,i,i+1$ mit den Belegungen $S={0,1}$ (0 nachfolgend für dead, 1 nachfolgend für alive). So ergeben sich 8 verschiedene Anordnungen. Für jede Anordnung müssen wir angeben wie sich die mittlere Zelle i entwickelt. Dieses geschieht über die Angabe der Regel in Binärcodierung. Nachfolgend ein Beispiel für Regel 42. \\
 		Als erstes stellen wir $[42]_{10}$ als binär da. $42= 0*2^{7}+0*2^{6}+1*2^{5}+0*2^{4}+1*2^{3}+0*2^{2}+1*2^{1}+0*2^{0}=0*128+0*64+1*32+0*16+1*8+0*4+1*2+0*1=[00101010]_{2}$ und tragen das Ergebnis in die Tabelle ein.
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
@@ -230,9 +233,10 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\newpage
 \section{Discrete Event System Specification (DEVS)}
 	\subsection{Vergleich zu zellulären Automaten}
-		Im Vergleich zu zellulären Automaten ist in DEVS die Positionierung der einzelnen Bausteine egal und die Kommunikation kann mit belieben Komponenten erfolgen, nicht wie bei den CA mit den unmittelbar anliegenden Nachbarn. Mit DEVS ist es möglich ein System sowohl durch Dekomposition einzelne Bausteine zu verfeinern als auch durch Komposition die Bausteine wieder zusammen zu fassen. Dadurch ist es möglich in DEVS ein System beliebig fein/grob zu spezifizieren. Der Formalismus ist diskret Ereignisorientiert d.h. wir springen von Ereignis zu Ereignis.
+		Im Vergleich zu zellulären Automaten ist in DEVS die Positionierung der einzelnen Bausteine egal und die Kommunikation kann mit belieben Komponenten erfolgen, nicht wie bei den CA mit den unmittelbar anliegenden Nachbarn. Mit DEVS ist es möglich ein System sowohl durch Dekomposition einzelner Bausteine zu verfeinern als auch durch Komposition die Bausteine wieder zusammen zu fassen. Dadurch ist es möglich in DEVS ein System beliebig fein/grob zu spezifizieren. Der Formalismus ist diskret Ereignisorientiert d.h. wir springen von Ereignis zu Ereignis.
 	\subsection{Darstellung}
-		Eine übliche Darstellungsform sind geschachtelte Rechtecke. Die Koppelungen werden dabei durch gerichtete Pfeile von und zu Dreiecken die auf den Rändern der Rechtecke positioniert sind und nach außen zeigen wenn sie Ausgabeports und nach innen zeigen wenn sie Eingabeports repräsentieren.
+		Eine übliche Darstellungsform sind geschachtelte Rechtecke. Die Koppelungen werden dabei durch gerichtete Pfeile von und zu Dreiecken repräsentieren.\\
+		Die Dreiecke sind an den Rändern der Rechtecke positioniert und zeigen nach außen, wenn sie Ausgabeports sind oder nach innen, wenn sie Eingabeports sind.
 		\begin{center}
 			\includegraphics[scale=0.6]{images/devs-boxes.jpg}
 		\end{center}
@@ -240,17 +244,19 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\begin{center}
 			\includegraphics[scale=0.5]{images/devs-baum.jpg}
 		\end{center}
-		Für die Darstellung eine Ausführungssemantik entsprechende sind noch die Begriffe Koordinatoren und Simulatoren zu klären. In einen Prozessorbaum sind alle gekoppelten Modelle Koordinatoren und alle atomare Modelle Simulatoren. Zusätzlich wird ein Root-Koordinator eingeführt welcher die Wurzel des Prozessorbaumes bildet. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erläutern werden.
+		Für die Darstellung einer Ausführungssemantik sind noch die Begriffe Koordinatoren und Simulatoren zu klären.\\
+		In einen Prozessorbaum sind alle gekoppelten Modelle Koordinatoren und alle atomare Modelle Simulatoren. Zusätzlich wird ein Root-Koordinator eingeführt welcher die Wurzel des Prozessorbaumes bildet. Diese Unterteilung ist nötig für die Ausführsemantik, welche wir nachträglich noch erläutern werden.
 	\begin{center}
 			\includegraphics[scale=0.5]{images/devs-prozessorbaum.jpg}
 	\end{center}
 	\subsection{DEVS: Atomare Modelle}
-		Ein atomares Modell besitzt einen Zustand in diesem das System über einen definierten Zeitraum (auch unendlich lange) verweilt. Der Zustand ändert sich erst wenn ein Ereignis eintritt oder die Verweilzeit abgelaufen ist. Zu dem Ereignis gehört die aktuelle Zeit. Die Kombination von Zustand, Ereignis und der aktuellen Zeit entscheidet in welchem neuen Zustand das System übergeht. Die Zustandsüberführung kann durch ein externes Ereignis(direkte Eingabe) oder ein internes Ereignis(Verweilzeit) ausgelöst werden. Ausgehend durch diese Betrachtung ergibt sich folgende formale Spezifikation: $DEVS = (X,Y,S,\beta_{int},\beta{ext},ta,\lambda)$ mit: 
+		Ein atomares Modell besitzt einen Zustand in diesem das System über einen definierten Zeitraum (auch unendlich lange) verweilt.\\
+		Der Zustand ändert sich erst wenn ein Ereignis eintritt oder die Verweilzeit abgelaufen ist. Zu dem Ereignis gehört die aktuelle Zeit. Die Kombination von Zustand, Ereignis und der aktuellen Zeit entscheidet in welchen neuen Zustand das System übergeht. Die Zustandsüberführung kann durch ein externes Ereignis(direkte Eingabe) oder ein internes Ereignis(Verweilzeit) ausgelöst werden. Ausgehend durch diese Betrachtung ergibt sich folgende formale Spezifikation: $DEVS = (X,Y,S,\beta_{int},\beta{ext},ta,\lambda)$ mit: 
 		\begin{itemize}
 			\item $X$ die Eingabemenge
 			\item $Y$ die Ausgabemenge
 			\item $S$ die Menge der Zustände
-			\item $ta: S \rightarrow \mathds{R}^{+}_{0,\infty}$ Zeitfortschrittfunktion weist jedem Zustand eine Zeitspanne zu, in die dieser Zustand von sich aus bestehen bleibt bevor ein interner Zustandsübergang ausgelöst wird
+			\item $ta: S \rightarrow \mathds{R}^{+}_{0,\infty}$ Zeitfortschrittfunktion die jedem Zustand eine Zeitspanne zuweist, in die dieser Zustand von sich aus bestehen bleibt bevor ein interner Zustandsübergang ausgelöst wird
 			\item $\beta_{int}: S \rightarrow S$ interne Übergangsfunktion (zeitgetriggerte Ereignisse)
 			\item $\beta_{ext}: Q \times X \rightarrow S$ externe Übergangsfunktion (situative Ereignisse) mit $Q=\{(s,e)|s\in S, 0 \leq e \leq ta(s)\}$
 			\item $\lambda: S \rightarrow Y$ Ausgabefunktion
@@ -258,12 +264,12 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		Nachfolgend zu den Zustandsänderungen ist folgendes zu sagen: bei internen Ereignissen möchte das Modell eine Zustandsüberführung zu einem bestimmten Zeitput ($ta(s) \rightarrow tonie$) durchführen (tonie = time of next event), bei externen Ereignissen bekommt das Modelle eine Nachricht und ändert aufgrund der Eingabe seinen Zustand.\\
 		Die Atomaren Modelle werden wir später nutzen um einzelne Komponenten in den gekoppelten Modellen zu spezifizieren.
 	\subsection{DEVS: Gekoppelte Modelle}
-		Ein gekoppeltes Modell ist eine Dekompostion eines Atomaren Modell. Nachfolgend die formale Definiton: $DEVS = (X,Y,D,\{M_{d}|d \in D\}.EIC,EOC,IC,Select)$ mit:
+		Ein gekoppeltes Modell ist eine Dekompostion eines Atomaren Modells. Nachfolgend die formale Definiton: $DEVS = (X,Y,D,\{M_{d}|d \in D\}.EIC,EOC,IC,Select)$ mit:
 		\begin{itemize}
 			\item $X$ die Eingabemenge
 			\item $Y$ die Ausgabemenge
 			\item $D$ Menge mit Namen von den Komponenten
-			\item $\{M_{d}|d \in D\}$ eine Menge von DEVS-Modellen wobei jedes Modell ein Name $\in D$ besitzt
+			\item $\{M_{d}|d \in D\}$ eine Menge von DEVS-Modellen wobei jedes Modell einen Namen $\in D$ besitzt
 			\item $EIC$ Menge der externen Eingabekoppelungen (Eingabeports)
 			\item $EOC$ Menge der externen Ausgabekoppelungen (Augabeports)
 			\item $IC$ Menge der internen Koppelungen (interne Verbindung von Komponenten)
@@ -306,7 +312,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		 		\item Senden einer Eingabe x zum Kind
 		 		\item Warten auf $done(t)$ Nachricht von Kind
 	 		\end{enumerate}
-	 	\item[Koordinator:] Koordinatoren aktivieren die Kinder und leiten die eingehende Nachrichten an Kinder bzw. an höhere Koordinatoren weiter. Je nach Art der Nachricht reagiert der Koordinator anderes.
+	 	\item[Koordinator:] Koordinatoren aktivieren die Kinder und leiten die eingehenden Nachrichten an Kinder bzw. an höhere Koordinatoren weiter. Je nach Art der Nachricht reagiert der Koordinator anderes.
 	 		\begin{enumerate}
 	 			\item $(*,t)$ Nachricht empfangen
 	 				\begin{enumerate}
@@ -341,10 +347,10 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	 		\end{enumerate}
 	\end{description}
 	\subsection{Vergleich von DEVS und PDEVS}
-	PDEVS ermöglicht es uns parallele Ereignisse (interne und externe Ereignisse gleichzeitig) einfacher zu beschreiben. In PDEVS gibt es keine Select-Funktion welche die Prioritäten der Komponeten angibt. Mehre Komponenten können gleichzeitig einen intern Zustandsübergang ausführen. Kollisionen von internen und externen Ereignissen wird auf atomarer Ebene aufgelöst durch $\delta_{conf}$. Der Spezialfall, dass beide Generatoren zu gleichen Zeit eine Ausgabe erzeugen können, führt zur Erweiterung $X^{b}$
+	PDEVS ermöglicht es uns parallele Ereignisse (interne und externe Ereignisse gleichzeitig) einfacher zu beschreiben. In PDEVS gibt es keine Select-Funktion welche die Prioritäten der Komponeten angibt. Mehre Komponenten können gleichzeitig einen intern Zustandsübergang ausführen. Kollisionen von internen und externen Ereignissen wird auf atomarer Ebene aufgelöst durch $\delta_{conf}$. Der Spezialfall, dass beide Generatoren zur gleichen Zeit eine Ausgabe erzeugen können, führt zur Erweiterung $X^{b}$
 
 \section{Petrinetze}
-	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die Zentrale Idee hierbei ist, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Die Bestandteile  sind:
+	Die Modellierung mittels Petrinetzen geht zurück auf Adam Petri. Der Formalismus Petrinetz ist ein schlanker, visueller Modellierungsformalismus, mit denen nebenläufige Prozesse mit diskreten Elementen simuliert werden können. Die zentrale Idee hierbei ist es, dass die Interaktion von Prozessen durch das Verbrauchen und Generieren von Ressourcen nachempfunden wird. Die Bestandteile sind:
 	\begin{itemize}
 		\item Stellen
 		\item Marken
@@ -360,26 +366,30 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		Nachfolgend die formale Definition eines Netzes: 
 		\begin{description}
 			\item[Stellen:] Sind Plätze auf denen Marken liegen können ($S$)
-			\item[Transitionen:] Sind Verbindungen zwischen Stellen welche Marken konsumieren und produzieren können ($T$)
+			\item[Transitionen:] Sind Verbindungen zwischen Stellen, die Marken konsumieren und produzieren können ($T$)
 			\item[Flussrelationen:] Beschreiben die Verbindungen zwischen Stellen und Transitionen ($F$)
 			\item[Netz:] $N=(S,T,F)$, mit $S \cap T = \emptyset$ (die Namen von den Stellen und den Transitionen überschneiden sich nicht), $F \subseteq (S \times T) \cup (T \times S)$ (die Kanten verlaufen zwischen Stellen zu Transitionen und Transitionen zu Stellen)
 		\end{description}
-		Ausgehend von dieser Beschreibung definieren wir ein Stellen-Transitions-System $Y=(S,T,F,K,W,M_{0})$ mit:
+		Ausgehend von dieser Beschreibung definieren wir ein Stellen-Transitions-System\\
+		$Y=(S,T,F,K,W,M_{0})$ mit:
 		\begin{itemize}
 			\item $(S,T,F)$ ist ein Netz
 			\item $K: S \rightarrow \mathbf{N} \cup \{\infty\}$. weist jeder Stelle eine maximale Kapazität zu
 			\item $W: F \rightarrow \mathbf{N}$, weist jeder Kante ein Gewicht zu
-			\item $M_{0}: S \rightarrow \mathbf{N}_{0}$, weist jeder Stelle einen Anzahl an Ausgangsmarken zu wobei $\forall s \in S : M_{0} \leq K(s)$ (die Anzahl muss unter der definierten Kapazität liegen)
+			\item $M_{0}: S \rightarrow \mathbf{N}_{0}$, weist jeder Stelle einen Anzahl an Ausgangsmarken zu, wobei $\forall s \in S : M_{0} \leq K(s)$ (die Anzahl muss unter der definierten Kapazität liegen)
 		\end{itemize}
-		Bis jetzt können wir ein statisches Netz definieren, d.h. wir haben noch eine Aktion. Dies werden wir mit den nachfolgenden Definitionen beheben.
+		Bis jetzt können wir ein statisches Netz definieren, d.h. wir haben in diesem Formalismus noch etwas zu ergänzen. Dieses erfolgt in den nachfolgenden Definitionen.
 		\begin{description}
 			\item[Vorbereich einer Transtion:] $\bullet x = \{y|(y,x)\in F, y \in S, x \in T\}$, alle Stellen welche  mit einer Transition verbunden sind
 			\item[Nachbereich einer Transtion:] $x\bullet = \{y|(x,y)\in F, y \in S, x \in T\}$, alle Stellen welche von einer Transition verbunden sind
 			\item[Aktiviertheit einer Transtion:] \ \\
 				\begin{itemize}
-					\item $\forall s \in \bullet t \cap t \bullet . M(s) \leq K(s) - W(t,s) + W(s,t)$, wenn für alle Stellen im Vor- und Nachbereich einer Transition gilt: Die Anzahl der Markierungen der Stelle sind $\leq$ Kapazität der Stelle $-$  Anzahl der Marken die die Transition konsumiert $+$ Anzahl der Marken die die Transition auf die Stelle legt
-					\item $\forall s \in \bullet t.M(s) \grq W(s,t)$, wenn für alle Stellen im Vorbereich gilt: Die Anzahl der Marken auf der Stelle $\grq$ Anzahl der Marken die die Transition konsumiert
-					\item $\forall s \in t \bullet \setminus \bullet t.M(s) \leq K(S) - W(t,s)$, wenn für alle Stellen welche sich im Nachbereich befinden und nicht im Vorbereich gilt: die Anzahl der Marken der Stelle $\leq$ Kapazität der Stelle $-$ Anzahl der Marken die die Transition produziert und auf die Stelle legt
+					\item $\forall s \in \bullet t \cap t \bullet . M(s) \leq K(s) - W(t,s) + W(s,t)$\\
+					Wenn für alle Stellen im Vor- und Nachbereich einer Transition gilt: Die Anzahl der Markierungen der Stelle sind $\leq$ Kapazität der Stelle $-$  Anzahl der Marken die die Transition konsumiert $+$ Anzahl der Marken die die Transition auf die Stelle legt
+					\item $\forall s \in \bullet t.M(s) \geq W(s,t)$\\
+					Wenn für alle Stellen im Vorbereich gilt: Die Anzahl der Marken auf der Stelle $\geq$ Anzahl der Marken die die Transition konsumiert
+					\item $\forall s \in t \bullet \setminus \bullet t.M(s) \leq K(S) - W(t,s)$\\
+					Wenn für alle Stellen welche sich im Nachbereich befinden und nicht im Vorbereich gilt: die Anzahl der Marken der Stelle $\leq$ Kapazität der Stelle $-$ Anzahl der Marken die die Transition produziert und auf die Stelle legt
 				\end{itemize}
 		\end{description}
 	Die Zuständsübergänge ergeben sich wie folgt:
@@ -392,21 +402,22 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 			M(s) & sonst
 		\end{array} \right.
 	\end{equation*}
-	Im Simulator werden die aktivierten Transitionen berechnet, wichtig ist dabei die Berücksichtigung von Transitionen für die gilt $\bullet t = \emptyset$ (Transitionen welche nur Markenproduzieren), und zufällig eine Transition geschaltet. Sollte die Menge der aktivierten Transitionen leer sein wird die Simulation abgebrochen.
+	Im Simulator werden die aktivierten Transitionen berechnet, wichtig ist dabei die Berücksichtigung von Transitionen für die gilt $\bullet t = \emptyset$ (Transitionen welche nur Markenproduzieren), und zufällig eine Transition geschaltet. Sollte die Menge der aktivierten Transitionen leer sein, so wird die Simulation abgebrochen.
 	\subsection{Ereichbarkeitsgraph}
-	Standard Petrinetze müssen nicht simuliert werden. Es reicht aus dem Ereichbarkeitsgraph eine Probe zu ziehen, aus den möglichen Wegen durch den Ereichbarkeitsgraph. Er wird dadurch erzeugt, dass, mit der Anfangsmarkierung beginnend, die Menge der in der Markierung aktivierten Transitionen ermittelt und jeweils die Folgemarkierung berechnet wird.
+	Standard Petrinetze müssen nicht simuliert werden. Es reicht aus den Ereichbarkeitsgraphen einer Probe zu unterziehen. Dabei werden die möglichen Wegen durch den Ereichbarkeitsgraph überprüft. Dieser wird erzeugt, indem mit der Anfangsmarkierung beginnend, die Menge der aktivierten Transitionen ermittelt und jeweils die Folgemarkierung berechnet wird.
 	\subsection{Weitere Eigenschaften}
 	\begin{description}
-		\item[Konflikte:] Gegeben der Situation das verschiedene Prozesse zum Betriebsmittel konkurieren defieren wie folgt ein Konflikt zwischen zwei Transitionen: Gegeben sei ein Stellen-Transitionssystem mit mind. 2 Transitionen $t_{1}$,$t_{2}$. So stehen diese in Konflikt falls $t_{1}$ und $t_{2}$ schalten könnten, jedoch nicht beide gleichzeitig. Die Entscheidung welche Transition ausgeführt wird, erfolgt dabei nach der Simulationssemantik, nicht deterministisch.
-		\item[Aktivierbar:] Eine Transitionen heißt aktivierbar wenn sie unter mindestens einer Folgemarkierung aktiviert ist.
-		\item[Lebendig:] Eine Transition heißt lebendig, wenn sie unter allen Folgemarkierung aktivierbar ist.
-		\item [Schwach lebendig (deadlockfrei):] Ein Stellen-Transitionssystem heißt schwach lebendig, wenn unter jeder erreichbaren Markierung mindesten eine Transition aktiviert ist. Ein System mit mindestens einer lebendigen Transition ist schwach lebendig.
-		\item [Stark lebendig (lebendig):] Ein Stellen-Transitionssystem heißt stark lebendig, wenn aus jeder erreichbaren Markierung jede Transition aktivierbar ist. Für ein stark lebendiges System mit nichtleerer Transitionsmenge enthält mindestens eine lebendige Transition.
-		\item[Tot:] Ein System ist genau tot, wenn keine Transition aktivierbar ist.
+		\item[Konflikte:] In einer Situation, in der verschiedene Prozesse um Betriebsmittel (Ressourcen) konkurrieren, definieren wir wie folgt einen Konflikt zwischen zwei Transitionen:\\
+		Gegeben sei ein Stellen-Transitions-System mit mindestens zwei Transitionen $t_{1}$,$t_{2}$. So stehen diese in einem Konflikt, falls $t_{1}$ und $t_{2}$ schalten könnten, jedoch nicht beide gleichzeitig. Die Entscheidung welche Transition ausgeführt wird, erfolgt dabei nach der Simulationssemantik, nicht deterministisch.
+		\item[Aktivierbar:] heißt eine Transitionen, wenn sie unter mindestens einer Folgemarkierung aktiviert ist.
+		\item[Lebendig:] heißt eine Transitionen, wenn sie unter allen Folgemarkierung aktivierbar ist.
+		\item [Schwach lebendig (deadlockfrei):] heißt ein Stellen-Transitions-System, wenn unter jeder erreichbaren Markierung mindesten eine Transition aktiviert ist. Ein System mit mindestens einer lebendigen Transition ist schwach lebendig.
+		\item [Stark lebendig (lebendig):] heißt ein Stellen-Transitions-System, wenn aus jeder erreichbaren Markierung jede Transition aktivierbar ist. Ein stark lebendiges System mit nicht leerer Transitionsmenge enthält mindestens eine lebendige Transition.
+		\item[Tot:] ist ein System genau dann, wenn keine Transition aktivierbar ist.
 		\end{description}
-		Ziel dieser Definitionen ist es also Aussagen über Netze zu tätigen ohne diese explizit zu berechnen (Analysen statt Simulation). Dadurch können wir allgemeingültige Aussagen über das System schließen.
+		Ziel dieser Definitionen ist es Aussagen über Netze zu tätigen ohne diese explizit zu berechnen (Analysen statt Simulation). Dadurch können wir allgemeingültige Aussagen über das System schließen.
 	\subsection{Stochastische Petri-Netze}
-		Ziel von Stochastischen Petri-Netzen ist es Zeit zu modellieren, dadurch ist der Formalismus nicht mehr diskret schrittweise. Idee ist es dabei, dass Transitionen Zeit verbrauchen zum Schalten. Nachfolgend verwenden wir die Exponentialverteilung für die zufallsverteilte Dauer der Schaltzeit. Es gilt die Definition von Petri-Netzen mit einer kleinen Erweiterung: $Y = (S,T,F,M_{0},R)$ mit:
+		Ziel von Stochastischen Petri-Netzen ist es Zeit zu modellieren. Dadurch ist der Formalismus nicht mehr diskret schrittweise. Die grundlegende Idee dabei ist, dass Transitionen Zeit verbrauchen zum Schalten. Nachfolgend verwenden wir die Exponentialverteilung für die zufallsverteilte Dauer der Schaltzeit. Es gilt die Definition von Petri-Netzen mit einer kleinen Erweiterung: $Y = (S,T,F,M_{0},R)$:
 		\begin{itemize}
 			\item $S,T,F,M$ wie in Petri-Netzen definiert
 			\item $R = \{r_{1},\dots,r_{m}\}$ mit $r_{i} \in R$ ist der Mittelwert der zu der Transition $t_{i}$ gehörigen exponentiell verteilten Schaltrate
@@ -416,31 +427,32 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 	\subsection{Rückblick}
 		Alle bisherigen Formalismen haben eines gemeinsam: eine statische Kommunikation- und Kompositionsstruktur. So sind bei Zellulären Automaten die Nachbarschaften fest definiert und ändern sich nicht, bei DEVS ändern sich die Koppelungen und die Komponenten nicht und bei Petrinetzen ändert sich nicht die Anzahl an Knoten und Kanten. Nachfolgend werden wir einen Formalismus kennen lernen der besonders geeignet ist Interaktionen/Kommunikation zu modellieren.
 	\subsection{$\pi$-Kalkül}
-		Im $\pi$-Kalkül wird das System durch interagierende Prozesse beschrieben. Die Kommunikation der Prozesse geschieht über Kanäle, welche durch Namen definiert sind. Der Kommunikationsinhalt sind immer die Namen von den Kanälen. Nachfolgend wird die Syntax des Kalküls beschrieben.
+		Im $\pi$-Kalkül wird das System durch interagierende Prozesse beschrieben. Die Kommunikation der Prozesse geschieht über Kanäle, welche durch Namen definiert sind. Der Inhalt der Kommunikation sind immer die Namen der Kanäle. Nachfolgend wird die Syntax des Kalküls beschrieben.
 		\begin{itemize}
-			\item $P::= 0$ P ist der 0-Prozess (ist terminiert)
-			\item $P||Q$ P und Q laufen parallel
-			\item $c!(v).P$ Prozess wartet bis v auf Kanal c gesendet werden kann und verhält sich dann wie P
-			\item $c?(x).P$ Prozess wartet auf Eingabe auf Kanal c und bindet die Eingabe an die Variable x und verhält sich dann wie P
-			\item $(\nu x).P$ Erstelle Kanal x und fortsetzen wie Prozess P
-			\item $!P$ Prozess findet unendlich oft nebenläufig statt
-			\item $P+Q$ Prozess verhält sich wie P xor Q
+			\item $P::= 0$ $\rightarrow$ P ist der 0-Prozess (ist terminiert)
+			\item $P||Q$ $\rightarrow$ P und Q laufen parallel
+			\item $c!(v).P$ $\rightarrow$ Prozess wartet bis v auf Kanal c gesendet werden kann und verhält sich dann wie P
+			\item $c?(x).P$ $\rightarrow$ Prozess wartet auf Eingabe auf Kanal c und bindet die Eingabe an die Variable x und verhält sich dann wie P
+			\item $(\nu x).P$ $\rightarrow$ Erstelle Kanal x und setze fort wie Prozess P
+			\item $!P$ $\rightarrow$ Prozess findet unendlich oft nebenläufig statt
+			\item $P+Q$ $\rightarrow$ Prozess verhält sich wie P xor Q
 		\end{itemize}
-		Die freien Namen (fn)ergeben sich wie folgt:
+		Die freien Namen (fn) ergeben sich wie folgt:
 		\begin{itemize}
 			\item $fn(0) = \emptyset$
 			\item $fn(c!(v).P) = fn(P) \cup \{c,v\}$
 			\item $fn(c?(v).P) = fn(P\setminus\{x\}) \cup \{c\} $
 		\end{itemize}
-		Wir wissen nun wie man Prozesse/Systeme beschreibt jedoch können wir keine Reduktionen durchführen d.h. wir können noch keine Prozesse laufen lassen. Deshalb werden folgende Reduktionsregeln eingeführt. Im Zähler steht dabei die Vorbedingung, im Nenner steht dabei die Entwicklung des Prozesses.
+		Wir wissen nun wie man Prozesse/Systeme beschreibt, jedoch können wir keine Reduktionen durchführen d.h. wir können noch keine Prozesse laufen lassen. Deshalb werden folgende Reduktionsregeln eingeführt. Im Zähler steht dabei die Vorbedingung, im Nenner steht dabei die Entwicklung des Prozesses.
 		\begin{description}
 			\item [Nebenläufigkeit $P||Q$:] $\frac{P \rightarrow P'}{P||Q \rightarrow P'||Q}$ d.h. wenn sich der Prozess P zu P' entwickelt ändert sich in der parallel Ausführung der Prozess Q nicht.
-			\item [Kommunikation $c!(v).P || c?(x).Q$:] $\frac{P \rightarrow P'}{P || Q\{v/x\}}$ d.h. $c?(x).Q$ hört auf Kanal c auf ein x, $c!(v).P$ sendet auf Kanal c ein v, so wird in Q alle x durch v ersetzt.
+			\item [Kommunikation $c!(v).P || c?(x).Q$:] $\frac{P \rightarrow P'}{P || Q\{v/x\}}$ d.h. $c?(x).Q$ hört auf Kanal c auf ein x, $c!(v).P$ sendet auf Kanal c ein v, so werden in Q alle x durch v ersetzt.
 		\end{description}
 	\subsection{Stochastisches $\pi$-Kalkül}
 \section{Stochastik}
 	\subsection{Warum?}
-	Viele diskrete Modelle beinhalten Variablen, deren Werte einer stochastischen Verteilung folgen. So sind diese Stochastischen Modelle, Modelle mit Zufallsaspekten. Die resultierenden Simulationsexperimenten mit stochastischen Modellen Zufallsexperimente. Aus der Sicht der Anwendung ist es interessant geeignete stochastische Verteilungen und Parameter für die Modellvariablen zu finden. Genutzt werden können dafür Beobachtungen am realen System bzw. Erfahrungswerte. Ein Zufallsexperiment ist ein Prozess, dessen Ergebnis nicht mit Sicherheit angegeben werden kann. Eine Zufallsvariable ist eine Funktion, die das Ergebniss eines Zufallsexperiment ausdrückt.
+	Viele diskrete Modelle beinhalten Variablen, deren Werte einer stochastischen Verteilung folgen. So sind diese Stochastischen Modelle Modelle mit Zufallsaspekten. Die resultierenden Simulationsexperimenten mit stochastischen Modellen sind Zufallsexperimente.\\
+	Aus der Sicht der Anwendung ist es interessant geeignete stochastische Verteilungen und Parameter für die Modellvariablen zu finden. Dafür können Beobachtungen am realen System bzw. Erfahrungswerte genutzt werden. Ein Zufallsexperiment ist ein Prozess, dessen Ergebnis nicht mit Sicherheit angegeben werden kann. Eine Zufallsvariable ist eine Funktion, die das Ergebnis eines Zufallsexperiment ausdrückt.
 	\subsection{Zufallsvariablen}
 	Die Verteilungsfunktion $F(x)$ einer Zufallsvaraible $X$ ist wie folgt definiert: $F(x) = P(X\leq x)$ mit $-\infty \le x \le \infty$ mit folgenden Eigenschaften:
 	\begin{itemize}
@@ -448,12 +460,14 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Urmacher, entstammen der 
 		\item $F(x)$ ist monoton wachsend, es gilt also für bel. $x_{1}, x_{2}, x_{1} \leq x_{2}$: $F(x_{1}) \leq F(x_{2})$
 		\item $\lim_{x \to \infty} F(x) = 1$ und $\lim_{x \to -\infty} F(x) = 0 $
 	\end{itemize}
-	Man unterscheidet in diskreten und kontinuierlichen Zufallsvariablen.
+	Man unterscheidet in diskrete und kontinuierliche Zufallsvariablen.
 	\begin{description}
 		\item[diskret:] Eine Zufallsvariable ist diskret, wenn sie in jedem beschränkten Intervall nur endlich viele Ausprägungen annehmen kann.
-		\item[kontinuierlich:] Eine Zufallsvariable ist diskret, wenn sie in jedem beschränkten Intervall über abzählbar viele Ausprägungen annehmen kann.
+		\item[kontinuierlich:] Eine Zufallsvariable ist kontinuierlich, wenn sie in jedem beschränkten Intervall über abzählbar viele Ausprägungen annehmen kann.
 	\end{description}
-	Wie Wahrscheinlichkeitsdichtefunktion gibt an wie groß die Wahrscheinlichkeit ist, dass die Zufallsvariable X einen Wert in einem Intervall $[x,x+\delta x]$ annimmt. Die Dichtefunktion ist wie folgt definiert: $P(X\in[x,x+\delta x]) = \int_{x}^{x+\delta x} f(y) dy$. Die Verteilungsfunktion $F(x)$ gibt an, mit welcher Wahrscheinlichkeit eine Zufallsvariable höchstens einen Wert x annimmt. $F(x) = P(X\in[\inf,x]) = \int_{-\inf}^{x} f(y) dy$.
+	Die Wahrscheinlichkeitsdichtefunktion gibt an, wie groß die Wahrscheinlichkeit ist, dass die Zufallsvariable X einen Wert in einem Intervall $[x,x+\delta x]$ annimmt.\\
+	Die Dichtefunktion ist wie folgt definiert: $P(X\in[x,x+\delta x]) = \int_{x}^{x+\delta x} f(y) dy$.\\
+	Die Verteilungsfunktion $F(x)$ gibt an, mit welcher Wahrscheinlichkeit eine Zufallsvariable höchstens einen Wert x annimmt. $F(x) = P(X\in[\inf,x]) = \int_{-\inf}^{x} f(y) dy$.
 	\subsection{Wahrscheinlichkeits Verteilungen}
 		\subsubsection{Uniforme Verteilung }
 		\begin{itemize}
