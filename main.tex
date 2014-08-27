@@ -485,6 +485,9 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Uhrmacher, entstammen der
 			\end{array} \right.$
 		\item Ist Grundlage zur Generierung von Zufallszahlen anderer Verteilungen.
 	\end{itemize}
+	\begin{center}
+		 \includegraphics[scale=0.5]{images/uniform.jpg}
+	\end{center}
 	\subsubsection{Gleichverteilung U(0,1)}
 	\begin{itemize}
 		\item Spezialfall der Uniformen Verteilung mit a = 0 und b =1
@@ -501,6 +504,9 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Uhrmacher, entstammen der
 			\end{array} \right.$
 		\item Beispiel: Würfel, jedes mögliche Ereignis hat die Wahrscheinlichkeit $\frac{1}{6}$
 	\end{itemize}
+	\begin{center}
+		 \includegraphics[scale=0.5]{images/u01.jpg}
+	\end{center}
 	\subsubsection{Exponentialverteilung}
 	\begin{itemize}
 		\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
@@ -512,14 +518,19 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Uhrmacher, entstammen der
 		\item $F(t) = \int_{0}^{t} \lambda * \exp^{-\lambda*t} = 1 - \exp^{-\lambda*t}$
 		\item Beispiel: Häufig genutzt für die Modellierung von Dauern von Zufälligen Zeitintervallen wie Länge eines Telefongespräches, Zeit zwischen 2 Anrufen
 	\end{itemize}
+	\begin{center}
+		 \includegraphics[scale=0.5]{images/exp.jpg}
+	\end{center}
 	\subsubsection{Normalverteilung}
 	\begin{itemize}
 		\item $\lambda$ steht für die Zahl der erwarteten Ereignisse pro Einheitsintervall
 		\item $f(x) = \frac{1}{\sqrt{2*\pi*\sigma^{2}}}*\exp^{\frac{-(x-\mu)^{2}}{2*\sigma^{2}}}$
 		\item Beispiel: Häufig genutzt für die Modellierung von Beobachtungsfehlern (viele Werte sind exakt gemessen, einige deutlich zu groß andere deutlich zu klein)
 	\end{itemize}
-
-	\subsubsection{Passionverteilung}
+	\begin{center}
+		 \includegraphics[scale=0.5]{images/norm.jpg}
+	\end{center}
+	\subsubsection{Possionverteilung}
 	\begin{itemize}
 		\item $f(x) = \left\{ 
 			\begin{array}{ l l}
@@ -533,8 +544,25 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Uhrmacher, entstammen der
 			\end{array}	\right.$
 		\item Beispiel: Anzahl von Ereignissen, die in einem Zeitintervall auftreten, falls die Ereignisse sich mit konstanter Rate ereignen (Anzahl von Kunden einer Bank pro Stunde)
 	\end{itemize}
+	\begin{center}
+		 \includegraphics[scale=0.5]{images/poisson.jpg}
+	\end{center}
 	\subsection{Bestimmung von Verteilungen}	
-\section{kontinuierliche Modelle}
+		Nachfolgend interessiert uns die Frage wie wir von Beobachtungen zu der dazugehörigen Wahrscheinlichkeitsverteilung kommen. Häufig werden dafür explizite Annahmen getroffen. Durch ein Vergleich von der Erwartung und dem erzielten Ergebnis erhalten wir eine akzeptable Verteilung. Durch Tests wird anschließend überprüft ob  wie gut die Verteilung zu den Beobachtungen passt. Beispiel : $\chi^{2}  = \sum_{j=i}^{k} \frac{(N_{j}-n*p_{j})^{2}}{n*p_{j}}$.
+	\subsection{Zufallszahlen}
+		Ziel von Pseudo-Zufallszahlengeneratoren ist es Zufallszahlen die uniform verteilt sind zu berechnen. Dabei werden Zufallszahlen durch eine feste Formel errechnet. Für die Reproduzierbarkeit von Experimenten ist es notwendig ausgehend von einem Seed die Sequenz von Zufallszahlen Steuern zu können $\rightarrow$  Seed reproduziert immer die gleiche Sequenz an Zufallszahlen. Probleme dabei sind jedoch das die generierten Zufallszahlen nicht zufällig sind und die Berechnung eine Periode (Wiederholung der Sequenz) aufweisen. Ziel ist es  eine möglichst große Periode zu erreichen. Bekannte Zufallszahlengeneratoren sind: Mersenne Twister, LCG. Häufig ist es jedoch gewünscht Zufallszahlen einer anderen Verteilung als $U(0,1)$ zu generieren. Eine mögliche Technik ist die Inverse Transformationsmethode. Bei dieser gehen wir davon aus das wir zu einer gewünschten Verteilungsfunktion die Inverse $F^{-1}$ berechnen können. Wir erhalten Zufallszahlen $X$ der Verteilung $F$ durch die Berechnung von $X = F^{-1}(U)$ mit U ist gleichverteilt im Intervall von $[0,1)$.
+	\subsection{Stochastik in Experimenten}
+		Bei stochastischen Modellen ist es notwendig mehere Läufe der Simulation zu berechnen. Ein einzelner Lauf erlaubt keine allgemeingültigen Aussagen. Eine sehr wichtige Frage in diesem Zusammenhang ist es die Anzahl der Replikationen zu bestimmen. Ziel ist es dabei nicht zu viele und nicht zu wenig Replikationen zu berechnen d.h. wir wünschen eine Interpretation mit einer gewünschten Sicherheit. Dies wird mittels Kofidenzintervallen ausgedrückt. Ein Kofidenzintervall $P(u_{1}\leq \mu \leq u_{2}) = \gamma$ gibt die Wahrscheinlichkeit an, dass der Kennwert $\gamma$ zwischen $u_{1}$ und $u_{2}$ liegt, $\mu$ beträgt.Es kann also mit einer Wahrscheinlichkeit $\mu$ garantiert werden, dass der Kennwert $\gamma$ in $[u_{1},u_{2}]$ liegt. Um die Länge eines Lauf zu steuern gibt es einige Möglichkeiten:
+			\begin{itemize}
+				\item Absoluter Zeitwert überschritten
+				\item Anzahl der Ereignisse reicht nicht mehr aus
+				\item Bestimmte Charakteristiken der berechneten Daten sind erreicht (Oszillilation, Schwellenwerte)
+			\end{itemize}
+		Dabei ist zu berücksichtigen dass bestimmte Modelle eine Warm-Up-Phase aufweisen. Die Warm-Up-Phase ist dabei eine Phase in dem sich das modellierte System erst in einen Bestimmten zustand einschwingt. Beispiel: Wenn wir die Mensa im Vollbetrieb optimieren möchten, ist es nicht von Interesse die ersten paar Minuten der Öffnung zu analysieren.
+		\begin{center}
+			\includegraphics[scale=0.5]{images/experiment.jpg}
+		\end{center}
+\section{Kontinuierliche Modelle}
 	\subsection{Einleitung}
 		Bei der diskreten Modellierung (ZA,DEVS,StoPi, Petrinetze) wird der Fokus auf einzelne Zustände und Zustandsübergänge gelegt. Dies ist aber nicht für alle Fragestellungen die richtige Art der Modellierung. Die Alternative ist, dass das Verhalten von Systemen als kontinuierlich angenommen wird. Bei vielen Systemen werden Angaben in Form des \glqq Anwachsens\grqq und \glqq Schrumpfens\grqq von Zahlen über die Zeit gemacht.\\
 		Markante Beispiele sind:
@@ -554,7 +582,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Uhrmacher, entstammen der
 				\item Modelle mit konzentrierten Parametern: ohne räumlichen, nur zeitliche Veränderungen, d.h. gewöhnliche Differentialsysteme
 				\item Modelle mit verteilten Parametern: mit räumlichen und zeitlichen Veränderungen, d.h. partielle Differentialsysteme (Diskretisierung des Raums in Gitterelemente)
 			\end{enumerate}
-		Eine weitere Form der Modellierung sind Integrationsverfahren.
+		Für die Berechnung dieser Modelle sind numerische Integrationsverfahren notwendig.
 	\subsection{Formalismen}
 		\subsubsection{ODE - Ordinary Differential Equations}
 		Eine gewöhnliche Differentialgleichung ist eine Differentialgleichung, bei der zu einer gesuchten Funktion nur Ableitungen nach genau einer Variablen auftreten. Ob überhaupt eine Lösung existiert, lässt sich anhand einiger Kriterien erkennen. Die Differentialgleichung selbst reicht im Allgemeinen nicht aus, um die Lösung eindeutig zu bestimmen.\\
@@ -564,8 +592,7 @@ Die Urheberrechte der Bilder liegen bei Prof. Adelinde Uhrmacher, entstammen der
 		\subsubsection{Verwendung}
 
 	\subsection{Blockdiagramme}
-		Blockdiagramme sind die graphische Repräsentation von Differentialgleichungen in Simulink, wobei das zentrale Element der Integratorblock ist. Das folgende Beispiel zeigt das Modellierte Verhalten von drei Generationen:\\
-		TODO: Bild einfügen
+		Blockdiagramme sind die graphische Repräsentation von Differentialgleichungen in Simulink, wobei das zentrale Element der Integratorblock ist. Die Ideen dabei ist das jede Variable als Block dargestellt wird. Die Konstanten der Variablen werden durch ein Pfeil zum Block dargestellt.
 		
 	\subsection{Lösungsfindung durch verschiedene Verfahren}
 		Bekanntermaßen geschieht die Darstellung mittels eines Gleichungssystems. Es gibt unendlich viele Zustandsübergänge pro Zeitintervall. Eine Lösung lässt sich deshalb im Allgemeinen nicht analytisch sondern durch numerische Integration (näherungsweise Berechnen) bestimmten.
